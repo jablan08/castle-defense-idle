@@ -21,29 +21,70 @@ addEventListener('resize', () => {
     init()
 })
 
+function Keyboarder() {
+    let keyState = {};
+    window.onkeydown = function(e) { 
+        keyState[e.keyCode] = true;
+        // console.log(e.keyCode)
+        // console.log(keyState)
+
+    };
+    window.onkeyup = function(e) { 
+        keyState[e.keyCode] = false;
+        // console.log(e.keyCode)
+        // console.log(keyState)
+
+    };
+    this.isDown = function(keyCode) {
+        return keyState[keyCode] === true;
+    };
+    this.KEYS = { 
+        LEFT: 37,
+        RIGHT: 39,
+        SPACE: 32
+    };
+};
+
+
 // Objects
-function Player(x,y,radius,color, moveSpeed) {
-    this.x = x;
-    this.y = y;
-    // this.dx = dx;
-    // this.dy = dy;
-    this.radius = radius;
+function Player(name) {
+    this.name = name;
+    this.x = 300;
+    this.y = 300;
+    this.dx = 0;
+    this.dy = 0;
+    this.radius = 40;
     // this.minRadius = radius;
-    this.color = color;
+    this.color = "black";
     this.moveSpeed = 2
+    this.hp = 10;
+    this.keyboarder = new Keyboarder();
     this.draw = function() {
         cxt.beginPath();
         cxt.arc(this.x, this.y, this.radius, 0, Math.PI *2, false);
         cxt.fillStyle = this.color;
         cxt.fill();
         cxt.closePath
+     
     }
+   
     this.update = function() {
+        if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
+            // console.log("left key press")
+            this.x -=2 ;
+        } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
+            this.x += 2;
+        }
         this.draw();
+
     }
+    this.attack = function() {
+
+    }
+
 }
 
-function Enemy(x,y,radius,color, moveSpeed) {
+function Enemy(x,y,radius,color) {
     this.x = x;
     this.y = y;
     // this.dx = dx;
@@ -52,6 +93,7 @@ function Enemy(x,y,radius,color, moveSpeed) {
     // this.minRadius = radius;
     this.color = color;
     this.moveSpeed = 2
+    this.hp = Math.floor((Math.random())* 4)+1;
     this.draw = function() {
         cxt.beginPath();
         cxt.arc(this.x, this.y, this.radius, 0, Math.PI *2, false);
@@ -69,7 +111,7 @@ function Enemy(x,y,radius,color, moveSpeed) {
 let player1;
 let enemey;
 function init() {
-    player1 = new Player(300, 300, 40, "black")
+    player1 = new Player("Josh")
     enemey = new Enemy(600, 300, 50, "red")
 
 }
