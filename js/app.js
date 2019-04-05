@@ -8,11 +8,24 @@ const mouse = {
 }
 
 
+function collision(x1, width1, x2, width2) {
+    if (x1 < x2 + width2-80&& x1 + width1 > x2){
+        return true;
+    } else {
+        return false;
+    }
+}
+function getDistance(x1, y1, x2, y2){
+    let xDistance = x2 - x1;
+    let yDistance = y2 - y1;
+    return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+}
 //  Event listeners 
 
 addEventListener("mousemove", function(event){
     mouse.x = event.clientX;
     mouse.y = event.clientY;
+    console.log(event)
 })
 
 addEventListener('resize', () => {
@@ -48,79 +61,138 @@ function Keyboarder() {
 
 // Objects
 function Player(name) {
+    let srcX; 
+    let srcY;
+    let attackPos = 1;
+    let idlePos = 0;
+    let sheetWidth = 1200;
+    let sheetHeight = 416;
+
+    let cols = 5;
+    let rows = 4;
+    this.frameWidth = sheetWidth / cols;
+    this.frameHeight = sheetHeight / rows;
+    let currentFrame = 0;
+    const image = new Image();
+    image.src ="imgs/war.spread.png";
+    this.width 
     this.name = name;
     this.x = 300;
     this.y = 300;
-    this.dx = 0;
-    this.dy = 0;
-    this.radius = 40;
+    // this.dx = 0;
+    // this.dy = 0;
+    // this.radius = 40;
     // this.minRadius = radius;
     this.color = "black";
-    this.moveSpeed = 2
+    // this.moveSpeed = 2
+
     this.hp = 10;
     this.keyboarder = new Keyboarder();
     this.draw = function() {
-        cxt.beginPath();
-        cxt.arc(this.x, this.y, this.radius, 0, Math.PI *2, false);
-        cxt.fillStyle = this.color;
-        cxt.fill();
-        cxt.closePath
-     
+        cxt.drawImage(image, srcX, srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
+        // cxt.beginPath();
+        // cxt.arc(this.x, this.y, this.radius, 0, Math.PI *2, false);
+        // cxt.fillStyle = this.color;
+        // cxt.fill();
+        // cxt.moveTo(this.x,this.y);
+        // cxt.lineTo(this.x+50,this.y);
+        // cxt.lineTo(this.x+60,this.y-20);
+        // cxt.stroke();
+        // cxt.closePath
+
     }
-   
     this.update = function() {
+        currentFrame = ++currentFrame % cols;
+        srcX = currentFrame * this.frameWidth;
+        
         if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
             // console.log("left key press")
-            this.x -=2 ;
+            this.x -=4 ;
         } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
-            this.x += 2;
+            this.x += 4;
+        }  else if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
+            srcY = attackPos * this.frameHeight;
+            this.attack();
+        } else {
+            srcY = idlePos * this.frameHeight;
         }
         this.draw();
 
     }
     this.attack = function() {
-
+        if (collision(this.x,this.frameWidth,enemey.x,enemey.frameWidth)===true) {
+            console.log("has hit!")
+        }
     }
 
 }
 
-function Enemy(x,y,radius,color) {
-    this.x = x;
-    this.y = y;
-    // this.dx = dx;
-    // this.dy = dy;
-    this.radius = radius;
-    // this.minRadius = radius;
-    this.color = color;
+
+function Enemy() {
+    let srcX; 
+    let srcY;
+    let attackPos = 1;
+    let idlePos = 0;
+    let sheetWidth = 1240;
+    let sheetHeight = 453;
+
+    let cols = 5;
+    let rows = 3;
+    this.frameWidth = sheetWidth / cols;
+    this.frameHeight = sheetHeight / rows;
+    let currentFrame = 0;
+    const image = new Image();
+    image.src ="imgs/enemy.png";
+
+    this.name = name;
+    this.x = 200;
+    this.y = 250;
+    // this.width = width;
+    // this.height = height;
+    // this.radius = radius;
+    // // this.minRadius = radius;
+    // this.color = color;
     this.moveSpeed = 2
     this.hp = Math.floor((Math.random())* 4)+1;
     this.draw = function() {
-        cxt.beginPath();
-        cxt.arc(this.x, this.y, this.radius, 0, Math.PI *2, false);
-        cxt.fillStyle = this.color;
-        cxt.fill();
-        cxt.closePath
+        cxt.drawImage(image, srcX, srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
+        // cxt.fillStyle = "rgba(255, 255, 0, 0.5)"
+        // cxt.fillRect(this.x, this.y, this.width, this.height)
+       
+        // cxt.beginPath();
+        // cxt.arc(this.x, this.y, this.radius, 0, Math.PI *2, false);
+        // cxt.fillStyle = this.color;
+        // cxt.fill();
+        // cxt.closePath
     }
     this.update = function() {
+        currentFrame = ++currentFrame % cols;
+        srcX = currentFrame * this.frameWidth;
+        srcY = idlePos * this.frameHeight;        
         this.draw();
     }
 }
-
 
 // creating characters on the board
 let player1;
 let enemey;
 function init() {
     player1 = new Player("Josh")
-    enemey = new Enemy(600, 300, 50, "red")
+    enemey = new Enemy()
 
 }
 
 
 
-
+let animate2 = setInterval(function(){
+    cxt.clearRect(0,0, innerWidth,innerHeight);
+    player1.update();
+    enemey.update();
+    
+}, 100)
 const animate = () => {
-    requestAnimationFrame(animate);
+
+    // requestAnimationFrame(animate);
     cxt.clearRect(0,0, innerWidth,innerHeight);
     player1.update();
     enemey.update();
