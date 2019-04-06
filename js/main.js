@@ -65,13 +65,13 @@ function Keyboarder() {
 
 
 // creating characters on the board
-let player1;
-let enemies = [];
+let warrior;
+// let enemies = [];
 function init() {
-    player1 = new Player("Josh")
-    for (let i = 0; i < 3; i++) {
-        enemies.push(new Enemy());
-    }
+    warrior = new Player(1200,416,5,4,300,300,"warrior");
+    // for (let i = 0; i < 3; i++) {
+    //     enemies.push(new Enemy());
+    // }
 
 }
 
@@ -79,10 +79,10 @@ function init() {
 // Interval update
 const animate2 = setInterval(function(){
     cxt.clearRect(0,0, innerWidth,innerHeight);
-    player1.update();
-    enemies.forEach(enemy => {
-        enemy.update(enemies);
-    })
+    warrior.update();
+    // enemies.forEach(enemy => {
+    //     enemy.update(enemies);
+    // })
     // enemy.update();
     hit = false;
     
