@@ -2,7 +2,6 @@
 
 
 const canvas = document.querySelector("canvas");
-canvas.width = innerWidth;
 
 const cxt = canvas.getContext("2d");
 const mouse = {
@@ -36,11 +35,10 @@ addEventListener("mousemove", function(event){
     // console.log(event)
 })
 
-addEventListener('resize', () => {
-    canvas.width = innerWidth
+// addEventListener('resize', () => {
 
-    init()
-})
+//     init()
+// })
 // keyboard functions
 function Keyboarder() {
     let keyState = {};
@@ -65,11 +63,35 @@ function Keyboarder() {
 
 
 // creating characters on the board
-let warrior;
-// let enemies = [];
+// let ran = Math.floor(Math.random()*6);
 function init() {
-    warrior = new Player(1200,416,5,4,300,300,"warrior");
-    // for (let i = 0; i < 3; i++) {
+    let enemies = [
+    
+        [
+            lizard = new Enemy(1240,453,5,3,canvas.width*.10,65,"lizard")
+        ],
+        [
+            dragon = new Enemy(1290,1045,5,5,canvas.width*.08,225,"dragon")
+        ],
+        [
+           slime = new Enemy(705,535,5,5,canvas.width*.10,175,"slime")
+        ],
+        [
+            snake = new Enemy(735,376,5,4,canvas.width*.10,65,"snake")
+        ],
+        [
+            dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino")
+        ],
+    ]
+    warrior = new Player(1200,416,5,4,canvas.width*.72,300,"warrior");
+    archer = new Player(1264,1038,8,6,canvas.width*.75, 20,"archer")
+    mage = new Player(966,636,6,6,canvas.width*.75,200,"mage")
+    // enemy = new Enemy(enemies[ran][0],enemies[ran][1],enemies[ran][2],enemies[ran][3],enemies[0][4],enemies[0][5],
+    //     enemies[ran][6],enemies[ran][7]);
+    // enemy2 = new Enemy(enemies[ran][0],enemies[ran][1],enemies[ran][2],enemies[ran][3],enemies[ran][4],enemies[ran][5],
+    //     enemies[ran][6],enemies[ran][7]);
+    
+    // for (let i = 0; i < 3; i++) 3
     //     enemies.push(new Enemy());
     // }
 
@@ -80,6 +102,14 @@ function init() {
 const animate2 = setInterval(function(){
     cxt.clearRect(0,0, innerWidth,innerHeight);
     warrior.update();
+    mage.update();
+    archer.update();
+    lizard.update();
+    dragon.update();
+    // slime.update();
+    // snake.update();
+    // dino.update();
+
     // enemies.forEach(enemy => {
     //     enemy.update(enemies);
     // })

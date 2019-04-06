@@ -1,6 +1,7 @@
 
 
-const imgs = ["imgs/enemy.png", "imgs/enemy.flip.png", "imgs/war.spread.png", "imgs/archer.png", "imgs/mage.png"];
+const imgs = ["imgs/war.spread.png", "imgs/archer.png", "imgs/mage.png"];
+const enemyImgs = ["imgs/enemy.lizard.png", "imgs/enemy.dragon.png","imgs/enemy.slime.png","imgs/enemy.snake.png", "imgs/enemy.dino.png"];
 let hit = false;
 
 
@@ -83,13 +84,109 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name) {
 
     this.playerImage = function() {
         if (this.name === "warrior") {
-            this.image.src =imgs[2]  
+            this.image.src =imgs[0]  
+        } else if (this.name === "archer") {
+            this.image.src = imgs[1]
+        } else if (this.name === "mage") {
+            this.image.src = imgs[2]
         }
     }
 
 }
 
+
+
 // Enemies
+function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name) {
+    this.srcX; 
+    this.srcY;
+    this.attackPos = 1;
+    this.idlePos = 0;
+    this.sheetWidth = sheetWidth;
+    this.sheetHeight = sheetHeight;
+    this.cols = cols;
+    this.rows = rows;
+    this.frameWidth = sheetWidth / cols;
+    this.frameHeight = sheetHeight / rows;
+    this.currentFrame = 0;
+    this.image = new Image();
+    this.image.src;
+    // archer.image.src = imgs[3];
+    // mage.image.src = imgs[4];
+    this.name = name;
+    this.x = x;
+    this.y = y;
+    this.attackValue = 2;
+    // this.dx = 0;
+    // this.dy = 0;
+    // this.radius = 40;
+    this.hp = 10;
+    this.keyboarder = new Keyboarder();
+    this.draw = function() {
+        cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
+    }
+// Movement
+    this.enemyMotion = function() {
+        this.currentFrame = ++this.currentFrame % this.cols;
+        this.srcX = this.currentFrame * this.frameWidth;
+        this.srcY = this.idlePos * this.frameHeight;
+        
+        // if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
+        //     // console.log("left key press")
+        //     this.image.src = imgs[2];
+        //     this.x -=4 ;
+        // } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
+        //     this.image.src = imgs[3];
+        //     this.x += 4;
+        // }  else if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
+        //     srcY = attackPos * this.frameHeight;
+        //     this.attack();
+        // } /*else if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
+            
+        //     this.y -= 4;
+        // } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN)) {
+
+        //     this.y += 4;
+        // } */else {
+            
+        // }
+    }
+    this.update = function() {
+        this.enemyImage();
+        this.enemyMotion();
+        this.draw();
+        
+
+    }
+    this.attack = function() {
+        // for (let i = 0; i <enemies.length; i++) {
+        //     if (player1.x < enemies[i].x + enemies[i].frameWidth-100&&
+        //         player1.x + player1.frameWidth-50> enemies[i].x){
+        //         console.log("has hit!")
+        //         enemies[i].hp -= this.attackValue;
+        //         hit = true;
+        //     } else {
+                
+        //     }
+        // }
+    }
+
+    this.enemyImage = function() {
+        if (this.name === "lizard") {
+            this.image.src =enemyImgs[0]  
+        } else if (this.name === "dragon") {
+            this.image.src = enemyImgs[1]
+        } else if (this.name === "slime") {
+            this.image.src = enemyImgs[2]
+        } else if (this.name === "snake") {
+            this.image.src = enemyImgs[3]
+        } else if (this.name === "dino") {
+            this.image.src = enemyImgs[4]
+    }
+
+}
+}
+
 // function Enemy() {
 //     let srcX; 
 //     let srcY;
