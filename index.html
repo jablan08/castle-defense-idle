@@ -8,8 +8,42 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <h1 class="Wave">Wave: </h1>
     <canvas id="screen" width="800"  height="500"></canvas>
 
+    <div class="menus">
+        <div class="enemyMenu">
+            <div class="enemyHP">
+                <!-- <div class="enemyOne"> -->
+                Snake
+                <div class="snakeHpBar"></div>
+                <!-- </div> -->
+                <!-- <div class="enemyTwo"> -->
+                Slime
+                <div class="slimeHpBar"></div>
+                <!-- </div> -->
+                <!-- <div class="enemyThree"> -->
+                Dino
+                <div class="dinoHpBar"></div>
+                <!-- </div> -->
+
+            </div>
+        </div>
+        <div class="characterMenu">
+            <div class="icons">
+                <input type="image" class="attack" src="imgs/icons/menu.attack.png">
+                <input type="image" class="items" src="imgs/icons/menu.items.png">
+            </div>
+            <div class="characterHP">
+                Warrior
+                <div class="warHpBar"></div>
+                Archer
+                <div class="archerHpBar"></div>
+                Mage
+                <div class="mageHpBar"></div>
+            </div>
+        </div>
+    </div>
     <script src="js/players.js"></script>
     <script src="js/main.js"></script>
 </body>

@@ -1,7 +1,7 @@
 
 
-const imgs = ["imgs/war.spread.png", "imgs/archer.png", "imgs/mage.png"];
-const enemyImgs = ["imgs/enemy.lizard.png", "imgs/enemy.dragon.png","imgs/enemy.slime.png","imgs/enemy.snake.png", "imgs/enemy.dino.png"];
+const imgs = ["imgs/sprities/war.spread.png", "imgs/sprities/archer.png", "imgs/sprities/mage.png"];
+const enemyImgs = ["imgs/sprities/enemy.lizard.png", "imgs/sprities/enemy.dragon.png","imgs/sprities/enemy.slime.png","imgs/sprities/enemy.snake.png", "imgs/sprities/enemy.dino.png"];
 let hit = false;
 
 
@@ -22,8 +22,8 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name) {
     this.currentFrame = 0;
     this.image = new Image();
     this.image.src;
-    // archer.image.src = imgs[3];
-    // mage.image.src = imgs[4];
+    // archer.image.src = imgs/sprities[3];
+    // mage.image.src = imgs/sprities[4];
     this.name = name;
     this.x = x;
     this.y = y;
@@ -44,10 +44,10 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name) {
         
         // if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
         //     // console.log("left key press")
-        //     this.image.src = imgs[2];
+        //     this.image.src = imgs/sprities[2];
         //     this.x -=4 ;
         // } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
-        //     this.image.src = imgs[3];
+        //     this.image.src = imgs/sprities[3];
         //     this.x += 4;
         // }  else if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
         //     srcY = attackPos * this.frameHeight;
@@ -111,8 +111,8 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name) {
     this.currentFrame = 0;
     this.image = new Image();
     this.image.src;
-    // archer.image.src = imgs[3];
-    // mage.image.src = imgs[4];
+    // archer.image.src = imgs/sprities[3];
+    // mage.image.src = imgs/sprities[4];
     this.name = name;
     this.x = x;
     this.y = y;
@@ -133,10 +133,10 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name) {
         
         // if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
         //     // console.log("left key press")
-        //     this.image.src = imgs[2];
+        //     this.image.src = imgs/sprities[2];
         //     this.x -=4 ;
         // } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
-        //     this.image.src = imgs[3];
+        //     this.image.src = imgs/sprities[3];
         //     this.x += 4;
         // }  else if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
         //     srcY = attackPos * this.frameHeight;
@@ -202,7 +202,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name) {
 //     this.frameHeight = sheetHeight / rows;
 //     this.currentFrame = 0;
 //     this.image = new Image();
-//     this.image.src = imgs[0];
+//     this.image.src = imgs/sprities[0];
 //     this.velocity = 10;
 //     this.name = name;
 //     this.x = Math.random()*(innerWidth - this.frameWidth*2)+this.frameWidth;
@@ -216,9 +216,9 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name) {
 //     this.enemyMotion = function() {
 //         if (this.x + this.frameWidth >= innerWidth) {
 //             this.velocity = -this.velocity;
-//             this.image.src = imgs[1];
+//             this.image.src = imgs/sprities[1];
 //         } else if(this.x <= 0 ) {
-//             this.image.src = imgs[0];
+//             this.image.src = imgs/sprities[0];
 //             this.velocity = -this.velocity;
 //         }
 //         this.x += this.velocity; 
@@ -227,7 +227,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name) {
 //         if (hit === true) {
 //             console.log("enemy got hit")
 //             // currentFrame = ++currentFrame % cols;
-//             if (this.image.src === "file:///Users/mioji/seiLA/rpg_game/imgs/enemy.flip.png"){
+//             if (this.image.src === "file:///Users/mioji/seiLA/rpg_game/imgs/sprities/enemy.flip.png"){
 //                 // console.log("worked!")
 //                 srcX = 1 * this.frameWidth;
 //                 srcY = getHit * this.frameHeight;

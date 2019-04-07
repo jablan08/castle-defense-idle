@@ -12,7 +12,66 @@ canvas {
     margin:0;
     box-sizing: border-box
 }
+.wave {
+    color: #FFFFFF;
+}
 
 body {
     background-color: black;
 }
+input {
+    border: none;
+    outline: none;
+}
+
+.characterHP, .enemyHP {
+    width: 150px;
+    background-color:#4c6af0;
+    border: 2px solid white;
+    color: #FFFFFF;
+    
+  }
+  
+.warHpBar {
+    width: 100%;
+    height: 15px;
+    border: 2px solid white;
+    background-color: #4CAF50;
+  }
+.archerHpBar {
+    width: 100%;
+    height: 15px;
+    border: 2px solid white;
+    background-color: #4CAF50;
+  }
+.mageHpBar {
+    width: 100%;
+    height: 15px;
+    border: 2px solid white;
+    background-color: #4CAF50;
+  }
+.snakeHpBar {
+    width: 100%;
+    height: 15px;
+    border: 2px solid white;
+    background-color: #4CAF50;
+  }
+.slimeHpBar {
+    width: 100%;
+    height: 15px;
+    border: 2px solid white;
+    background-color: #4CAF50;
+  }
+.dinoHpBar {
+    width: 100%;
+    height: 15px;
+    border: 2px solid white;
+    background-color: #4CAF50;
+  }
+.menus {
+    display: flex;
+    justify-content: space-evenly;
+}
+.characterMenu {
+    display: flex;
+  }

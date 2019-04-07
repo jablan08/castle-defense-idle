@@ -104,11 +104,11 @@ const animate2 = setInterval(function(){
     warrior.update();
     mage.update();
     archer.update();
-    lizard.update();
-    dragon.update();
-    // slime.update();
-    // snake.update();
-    // dino.update();
+    // lizard.update();
+    // dragon.update();
+    slime.update();
+    snake.update();
+    dino.update();
 
     // enemies.forEach(enemy => {
     //     enemy.update(enemies);
