@@ -91,6 +91,12 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
         } else if (game.target==="Snake") {
             console.log("hit Snake")
             snakeHpBar.style.width = `${snake.hp -= this.strength}%`;
+        } else if (game.target==="Lizard") {
+            console.log("hit Snake")
+            lizHpBar.style.width = `${lizard.hp -= this.strength}%`;
+        } else if (game.target==="Dragon") {
+            console.log("hit Snake")
+            dragHpBar.style.width = `${dragon.hp -= this.strength}%`;
         } 
     }
     
@@ -209,8 +215,9 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
     }
     this.checkDead = function(){
         if (this.hp <= 0){
-            this.alive = false;    
-        }
+            this.alive = false;
+            game.mobs -=1    
+        } 
     }
     this.enemyImage = function() {
         if (this.name === "lizard") {

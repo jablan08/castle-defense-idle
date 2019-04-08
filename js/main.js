@@ -40,6 +40,7 @@ const lizAttkBar = document.querySelector(".lizAttkBar")
 const dragonTag = document.querySelector(".dragon")
 const dragHpBar = document.querySelector(".dragHpBar")
 const dragAttkBar = document.querySelector(".dragAttkBar")
+const wave = document.querySelector(".wave")
 
 
 
@@ -119,7 +120,14 @@ const dragAttkBar = document.querySelector(".dragAttkBar")
 // Game checker
 
 const game = {
-    wave: 1,
+   
+    mobs: 5,
+    wave() {
+        // if (dino.alive === false || slime.alive === false || snake.alive === false || lizard.alive === false|| dragon.alive === false)
+        // {
+            wave.innerText = `Enemies remaining: ${this.mobs}`
+        // }
+    },
     score: 0,
     target:"",
     CPUtarget: ["warrior", "archer", "mage"],
@@ -127,12 +135,17 @@ const game = {
 
     update(){
         this.deadEnemy();
-        this.newWave();
+        this.wave();
     },
     newWave() {
-        if (dino.alive === false && slime.alive===false && snake.alive === false){
             this.finalBoss = true;
-        } 
+            dragonTag.style.display = "block";
+            dragAttkBar.style.display = "block";
+            dragHpBar.style.display = "block";
+
+            lizTag.style.display = "block";
+            lizAttkBar.style.display = "block";
+            lizHpBar.style.display = "block";
     },
     deadEnemy(){
         if (dino.alive===false)
@@ -151,6 +164,20 @@ const game = {
             snakeAttkBar.style.display = "none";
             snakeHpBar.style.display = "none";
         }
+        if (lizard.alive===false){
+            lizTag.style.display = "none";
+            lizAttkBar.style.display = "none";
+            lizHpBar.style.display = "none";
+        }
+        if (dragon.alive===false){
+            dragonTag.style.display = "none";
+            dragAttkBar.style.display = "none";
+            dragHpBar.style.display = "none";
+        }
+        if (dino.alive === false && slime.alive===false && snake.alive === false) {
+            this.newWave();
+        }
+        
     }
 }
 
@@ -160,13 +187,13 @@ const game = {
 addEventListener("click", function(event){
     console.log(event.x,event.y)
     if (event.x > 398 && event.x < 524 && event.y < 452 && event.y > 403 && dino.alive===true) {
-        currentTarget.innerText = "Current Target: Dino.";
+        currentTarget.innerText = "Current Target: Dino";
         game.target = "Dino";
     } else if (event.x > 520 && event.x < 601 && event.y < 385 && event.y > 335 && slime.alive===true) {
-        currentTarget.innerText = "Current Target: Slime.";
+        currentTarget.innerText = "Current Target: Slime";
         game.target = "Slime";
     } else if (event.x > 519 && event.x < 608 && event.y < 493 && event.y > 445 && snake.alive===true) {
-        currentTarget.innerText = "Current Target: Snake.";
+        currentTarget.innerText = "Current Target: Snake";
         game.target = "Snake";
     }
 })
@@ -174,8 +201,12 @@ addEventListener("click", function(event){
 
 addEventListener("click", function(event){
     if (event.x > 382 && event.x < 565 && event.y < 458 && event.y > 327 && game.finalBoss ===true) {
+        currentTarget.innerText = "Current Target: Dragon";
+        game.target = "Dragon";
         console.log("You clicked the dragon")
     } else if (event.x > 549 && event.x < 692 && event.y < 388 && event.y > 293 && game.finalBoss ===true) {
+        currentTarget.innerText = "Current Target: Lizard";
+        game.target = "Lizard";
         console.log("You clicked the lizard.")
     }
         // mouse.x = event.clientX;

@@ -64,6 +64,6 @@ input {
     color: #FFFFFF
 }
 
-/* .lizAttkBar, .lizHpBar, .dragAttkBar, .dragHpBar, .dragon, .lizard {
+.lizAttkBar, .lizHpBar, .dragAttkBar, .dragHpBar, .dragon, .lizard {
     display: none;
-} */
+}
