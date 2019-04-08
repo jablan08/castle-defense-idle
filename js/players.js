@@ -70,6 +70,8 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name) {
 
     }
     this.attack = function() {
+        
+
         // for (let i = 0; i <enemies.length; i++) {
         //     if (player1.x < enemies[i].x + enemies[i].frameWidth-100&&
         //         player1.x + player1.frameWidth-50> enemies[i].x){

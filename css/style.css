@@ -1,10 +1,12 @@
 canvas {
-    background: grey;
+    /* background: grey; */
     padding-left: 0;
     padding-right: 0;
     margin-left: auto;
     margin-right: auto;
     display: block;
+    background-image: url("background/battlefield.jpg");
+    background-size: cover;
 }
 
 *,*::before,*::after{
@@ -13,6 +15,7 @@ canvas {
     box-sizing: border-box
 }
 .wave {
+    text-align: center;
     color: #FFFFFF;
 }
 
@@ -70,7 +73,11 @@ input {
   }
 .menus {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    border: 8px solid gray;
+    width: 800px;
+    margin: 0 auto;
+    
 }
 .characterMenu {
     display: flex;
