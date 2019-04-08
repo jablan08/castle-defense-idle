@@ -2,20 +2,83 @@
 
 
 const canvas = document.querySelector("canvas");
-
+const currentTarget = document.querySelector(".currentTarget");
 const cxt = canvas.getContext("2d");
 const mouse = {
     x: innerWidth / 2,
     y: innerHeight / 2
 }
-
+const attackButton = document.querySelector(".attack");
+attackButton.addEventListener("click", ()=>{
+    console.log("workerd")
+})
+const warAttkBar = document.querySelector(".warAttkBar")
+const archerAttkBar = document.querySelector(".archerAttkBar")
+const mageAttkBar = document.querySelector(".mageAttkBar")
+let warWidth = 1;
+let archerWidth= 1;
+let mageWidth= 1;
+var id = setInterval(warFrame, 100);
+var id = setInterval(archerFrame, 100);
+var id = setInterval(mageFrame, 100);
+function warFrame() {
+if (warrior.attkSpeed >= 100) {
+    warrior.attackReady = true;
+    // archer.attackReady = true;
+    // mage.attackReady = true;
+    // clearInterval(id);
+    warrior.attkSpeed = 1;
+    warAttkBar.style.width = warrior.attkSpeed + '%'; 
+    // archerAttkBar.style.width = width + '%'; 
+    // mageAttkBar.style.width = width + '%';
+    } else {
+      warrior.attkSpeed+=.75; 
+      warAttkBar.style.width = warrior.attkSpeed + '%'; 
+    //   archerAttkBar.style.width = width + '%'; 
+    //   mageAttkBar.style.width = width + '%'; 
+    }
+}
+function archerFrame() {
+if (archer.attkSpeed >= 100) {
+    // warrior.attackReady = true;
+    archer.attackReady = true;
+    // mage.attackReady = true;
+    // clearInterval(id);
+    archer.attkSpeed = 1;
+    // warAttkBar.style.width = width + '%'; 
+    archerAttkBar.style.width = archer.attkSpeed + '%'; 
+    // mageAttkBar.style.width = width + '%';
+    } else {
+      archer.attkSpeed+=1.5; 
+    //   warAttkBar.style.width = width + '%'; 
+      archerAttkBar.style.width = archer.attkSpeed + '%'; 
+    //   mageAttkBar.style.width = width + '%'; 
+    }
+}
+function mageFrame() {
+if (mage.attkSpeed >= 100) {
+    // warrior.attackReady = true;
+    // archer.attackReady = true;
+    mage.attackReady = true;
+    // clearInterval(id);
+    mage.attkSpeed=1;
+    // warAttkBar.style.width = width + '%'; 
+    // archerAttkBar.style.width = width + '%'; 
+    mageAttkBar.style.width = mage.attkSpeed + '%';
+    } else {
+      mage.attkSpeed+=.50; 
+    //   warAttkBar.style.width = width + '%'; 
+    //   archerAttkBar.style.width = width + '%'; 
+      mageAttkBar.style.width = mage.attkSpeed + '%'; 
+    }
+}
 
 // Game checker
 
 const game = {
     wave: 1,
     score: 0,
-
+    target:"",
 
     
 
@@ -30,21 +93,34 @@ const game = {
 //  Event listeners 
 
 addEventListener("click", function(event){
-    if (event.x > 407 && event.x < 520 && event.y < 372 && event.y > 330) {
-        console.log("You clicked the dino.")
-    } else if (event.x > 409 && event.x < 473 && event.y < 233 && event.y > 196) {
-        console.log("You clicked the slime.")
-    } else if (event.x > 416 && event.x < 485 && event.y < 112 && event.y > 67) {
-        console.log("You clicked the snake.")
-    }
-    // mouse.x = event.clientX;
-    // mouse.y = event.clientY;
     console.log(event.x,event.y)
+    if (event.x > 398 && event.x < 524 && event.y < 452 && event.y > 403) {
+        currentTarget.innerText = "Current Target: Dino.";
+        target = "Dino";
+    } else if (event.x > 520 && event.x < 601 && event.y < 385 && event.y > 335) {
+        currentTarget.innerText = "Current Target: Slime.";
+        target = "Slime";
+    } else if (event.x > 519 && event.x < 608 && event.y < 493 && event.y > 445) {
+        currentTarget.innerText = "Current Target: Snake.";
+        target = "Snake";
+    }
 })
+// Dragon and Lizard event listeners.
 
-window.addEventListener("click", (e)=>{
-    console.log(e.target);
-})
+// addEventListener("click", function(event){
+//     if (event.x > 382 && event.x < 565 && event.y < 458 && event.y > 327) {
+//         console.log("You clicked the dragon")
+//     } else if (event.x > 549 && event.x < 692 && event.y < 388 && event.y > 293) {
+//         console.log("You clicked the lizard.")
+//     }
+//         // mouse.x = event.clientX;
+//     // mouse.y = event.clientY;
+//     console.log(event.x,event.y)
+// })
+
+// window.addEventListener("click", (e)=>{
+//     console.log(e.target);
+// })
 
 // addEventListener('resize', () => {
 
@@ -94,9 +170,9 @@ function Keyboarder() {
             dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino")
         ],
     ]
-    warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior");
-    archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer")
-    mage = new Player(966,636,6,6,canvas.width*.75,250,"mage")
+    warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,.75);
+    archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer",4,1.50)
+    mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,.50)
     // enemy = new Enemy(enemies[ran][0],enemies[ran][1],enemies[ran][2],enemies[ran][3],enemies[0][4],enemies[0][5],
     //     enemies[ran][6],enemies[ran][7]);
     // enemy2 = new Enemy(enemies[ran][0],enemies[ran][1],enemies[ran][2],enemies[ran][3],enemies[ran][4],enemies[ran][5],

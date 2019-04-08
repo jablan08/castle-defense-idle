@@ -8,10 +8,10 @@ let hit = false;
 
 
 // Player
-function Player(sheetWidth, sheetHeight, cols, rows, x, y, name) {
+function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkSpeed) {
     this.srcX; 
     this.srcY;
-    this.attackPos = 1;
+    this.attackPos = attackPos;
     this.idlePos = 0;
     this.sheetWidth = sheetWidth;
     this.sheetHeight = sheetHeight;
@@ -27,7 +27,8 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name) {
     this.name = name;
     this.x = x;
     this.y = y;
-    this.attackValue = 2;
+    this.attackReady = false;
+    this.attkSpeed = attkSpeed;
     // this.dx = 0;
     // this.dy = 0;
     // this.radius = 40;
@@ -38,9 +39,10 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name) {
     }
 // Movement
     this.playerMotion = function() {
-        this.currentFrame = ++this.currentFrame % this.cols;
+        if (this.attackReady === false)
+        {this.currentFrame = ++this.currentFrame % this.cols;
         this.srcX = this.currentFrame * this.frameWidth;
-        this.srcY = this.idlePos * this.frameHeight;
+        this.srcY = this.idlePos * this.frameHeight;}
         
         // if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
         //     // console.log("left key press")
@@ -66,10 +68,47 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name) {
         this.playerImage();
         this.playerMotion();
         this.draw();
-        
+        this.attack();
+        // this.attackFrame();
 
     }
+    // this.attackFrame = function() {
+    //     if (width >= 100) {
+    //         this.attackReady = true;
+    //         // warrior.attackReady = true;
+    //         // archer.attackReady = true;
+    //         // mage.attackReady = true;
+    //         // clearInterval(id);
+    //         width = 1;
+    //         warAttkBar.style.width = width + '%'; 
+    //         archerAttkBar.style.width = width + '%'; 
+    //         mageAttkBar.style.width = width + '%';
+    //     } else {
+    //         width++; 
+    //         warAttkBar.style.width = width + '%'; 
+    //         archerAttkBar.style.width = width + '%'; 
+    //         mageAttkBar.style.width = width + '%'; 
+    //     }
+    // }
     this.attack = function() {
+        //auto attack
+        //
+        if (this.attackReady === true)
+        {this.currentFrame = ++this.currentFrame % this.cols;
+        this.srcX = this.currentFrame * this.frameWidth;
+        this.srcY = this.attackPos * this.frameHeight;
+        setTimeout(()=> {
+            this.attackReady = false
+        }, 750)
+        }
+        
+        // if (this.name === "warrior") {
+        //     this.image.src =imgs[0]  
+        // } else if (this.name === "archer") {
+        //     this.image.src = imgs[1]
+        // } else if (this.name === "mage") {
+        //     this.image.src = imgs[2]
+        // }
         
 
         // for (let i = 0; i <enemies.length; i++) {

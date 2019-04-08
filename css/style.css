@@ -82,3 +82,12 @@ input {
 .characterMenu {
     display: flex;
   }
+
+.mageAttkBar, .archerAttkBar, .warAttkBar {
+    width: 1%;
+    height: 7.5px;
+    background-color: red;
+}
+.currentTarget {
+    color: #FFFFFF
+}
