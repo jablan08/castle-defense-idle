@@ -1,14 +1,14 @@
 
 
-const imgs = ["imgs/sprities/war.spread.png", "imgs/sprities/archer.png", "imgs/sprities/mage.png"];
-const enemyImgs = ["imgs/sprities/enemy.lizard.png", "imgs/sprities/enemy.dragon.png","imgs/sprities/enemy.slime.png","imgs/sprities/enemy.snake.png", "imgs/sprities/enemy.dino.png"];
+const imgs = ["imgs/sprites/war.spread.png", "imgs/sprites/archer.png", "imgs/sprites/mage.png"];
+const enemyImgs = ["imgs/sprites/enemy.lizard.png", "imgs/sprites/enemy.dragon.png","imgs/sprites/enemy.slime.png","imgs/sprites/enemy.snake.png", "imgs/sprites/enemy.dino.png"];
 let hit = false;
 
 
 
 
 // Player
-function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRate) {
+function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRate,strength) {
     this.srcX; 
     this.srcY;
     this.attackPos = attackPos;
@@ -28,7 +28,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     this.attackReady = false;
     this.attkSpeed = 1;
     this.attkRate = attkRate;
-    this.strength = 5;
+    this.strength = strength;
     this.hp = 100;
     this.keyboarder = new Keyboarder();
     this.draw = function() {
@@ -109,7 +109,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
 
 
 // Enemies
-function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRate) {
+function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRate,strength) {
     this.srcX; 
     this.srcY;
     this.attackPos = 1;
@@ -123,20 +123,21 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
     this.currentFrame = 0;
     this.image = new Image();
     this.image.src;
-    // archer.image.src = imgs/sprities[3];
-    // mage.image.src = imgs/sprities[4];
+    // archer.image.src = imgs/sprites[3];
+    // mage.image.src = imgs/sprites[4];
     this.name = name;
     this.x = x;
     this.y = y;
     this.attackReady = false;
     this.attkSpeed = 1;
     this.attkRate = attkRate;
-    this.strength = 5;
+    this.strength = strength;
     this.attackPos = attackPos;
+    this.alive = true;
     // this.dx = 0;
     // this.dy = 0;
     // this.radius = 40;
-    this.hp = 100;
+    this.hp = 10;
     this.keyboarder = new Keyboarder();
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
@@ -149,11 +150,14 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
         this.srcY = this.idlePos * this.frameHeight;}
     }
     this.update = function() {
+        if (this.alive ===true){
         this.enemyImage();
         this.enemyMotion();
         this.draw();
         this.enemyBars();
         this.attackFrame();
+        this.checkDead();
+        }
         
 
     }
@@ -165,11 +169,15 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
             dinoAttkBar.style.width = this.attkSpeed + '%'; 
             slimeAttkBar.style.width = this.attkSpeed + '%'; 
             snakeAttkBar.style.width = this.attkSpeed + '%'; 
+            lizAttkBar.style.width = this.attkSpeed + '%'; 
+            dragAttkBar.style.width = this.attkSpeed + '%'; 
         } else {
             this.attkSpeed+= this.attkRate; 
             dinoAttkBar.style.width = dino.attkSpeed + '%'; 
             slimeAttkBar.style.width = slime.attkSpeed + '%'; 
             snakeAttkBar.style.width = snake.attkSpeed + '%'; 
+            lizAttkBar.style.width = lizard.attkSpeed + '%'; 
+            dragAttkBar.style.width = dragon.attkSpeed + '%'; 
 
         }
     }
@@ -187,31 +195,23 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
         
     }
     this.attack = function() {
-        // for (let i =0; i < game.CPUtarget.length; i++){
-            let random = Math.floor(Math.random()*3);
-            if (game.CPUtarget[random]==="warrior"){
-                warriorHpBar.style.width = `${warrior.hp -= this.strength}%`;
-                // console.log(`${this.name}hit the warrior`)
-            } else if (game.CPUtarget[random]==="archer"){
-                archerHpBar.style.width = `${archer.hp -= this.strength}%`;
-                // console.log(`${this.name}hit the archer`)
-            } else if (game.CPUtarget[random]==="mage"){
-                mageHpBar.style.width = `${mage.hp -= this.strength}%`;
-                // console.log(`${this.name}hit the mage`)
-            }
-        // }
-        // for (let i = 0; i <enemies.length; i++) {
-        //     if (player1.x < enemies[i].x + enemies[i].frameWidth-100&&
-        //         player1.x + player1.frameWidth-50> enemies[i].x){
-        //         console.log("has hit!")
-        //         enemies[i].hp -= this.attackValue;
-        //         hit = true;
-        //     } else {
-                
-        //     }
-        // }
+        let random = Math.floor(Math.random()*3);
+        if (game.CPUtarget[random]==="warrior"){
+            warriorHpBar.style.width = `${warrior.hp -= this.strength}%`;
+            // console.log(`${this.name}hit the warrior`)
+        } else if (game.CPUtarget[random]==="archer"){
+            archerHpBar.style.width = `${archer.hp -= this.strength}%`;
+            // console.log(`${this.name}hit the archer`)
+        } else if (game.CPUtarget[random]==="mage"){
+            mageHpBar.style.width = `${mage.hp -= this.strength}%`;
+            // console.log(`${this.name}hit the mage`)
+        }
     }
-
+    this.checkDead = function(){
+        if (this.hp <= 0){
+            this.alive = false;    
+        }
+    }
     this.enemyImage = function() {
         if (this.name === "lizard") {
             this.image.src =enemyImgs[0]  
@@ -223,9 +223,8 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
             this.image.src = enemyImgs[3]
         } else if (this.name === "dino") {
             this.image.src = enemyImgs[4]
+        }
     }
-
-}
 }
 
 // function Enemy() {
@@ -243,7 +242,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
 //     this.frameHeight = sheetHeight / rows;
 //     this.currentFrame = 0;
 //     this.image = new Image();
-//     this.image.src = imgs/sprities[0];
+//     this.image.src = imgs/sprites[0];
 //     this.velocity = 10;
 //     this.name = name;
 //     this.x = Math.random()*(innerWidth - this.frameWidth*2)+this.frameWidth;
@@ -257,9 +256,9 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
 //     this.enemyMotion = function() {
 //         if (this.x + this.frameWidth >= innerWidth) {
 //             this.velocity = -this.velocity;
-//             this.image.src = imgs/sprities[1];
+//             this.image.src = imgs/sprites[1];
 //         } else if(this.x <= 0 ) {
-//             this.image.src = imgs/sprities[0];
+//             this.image.src = imgs/sprites[0];
 //             this.velocity = -this.velocity;
 //         }
 //         this.x += this.velocity; 
@@ -268,7 +267,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
 //         if (hit === true) {
 //             console.log("enemy got hit")
 //             // currentFrame = ++currentFrame % cols;
-//             if (this.image.src === "file:///Users/mioji/seiLA/rpg_game/imgs/sprities/enemy.flip.png"){
+//             if (this.image.src === "file:///Users/mioji/seiLA/rpg_game/imgs/sprites/enemy.flip.png"){
 //                 // console.log("worked!")
 //                 srcX = 1 * this.frameWidth;
 //                 srcY = getHit * this.frameHeight;

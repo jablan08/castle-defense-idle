@@ -32,45 +32,17 @@ input {
     background-color:#4c6af0;
     border: 2px solid white;
     color: #FFFFFF;
+    height: 100%;
     
   }
-  
-.warHpBar {
+
+  .slimeHpBar, .dinoHpBar, .snakeHpBar, .mageHpBar, .archerHpBar,.warHpBar, .lizHpBar, .dragHpBar  {
     width: 100%;
     height: 15px;
     border: 2px solid white;
     background-color: #4CAF50;
-  }
-.archerHpBar {
-    width: 100%;
-    height: 15px;
-    border: 2px solid white;
-    background-color: #4CAF50;
-  }
-.mageHpBar {
-    width: 100%;
-    height: 15px;
-    border: 2px solid white;
-    background-color: #4CAF50;
-  }
-.snakeHpBar {
-    width: 100%;
-    height: 15px;
-    border: 2px solid white;
-    background-color: #4CAF50;
-  }
-.slimeHpBar {
-    width: 100%;
-    height: 15px;
-    border: 2px solid white;
-    background-color: #4CAF50;
-  }
-.dinoHpBar {
-    width: 100%;
-    height: 15px;
-    border: 2px solid white;
-    background-color: #4CAF50;
-  }
+  }  
+
 .menus {
     display: flex;
     justify-content: space-between;
@@ -83,7 +55,7 @@ input {
     display: flex;
   }
 
-.mageAttkBar, .archerAttkBar, .warAttkBar, .dinoAttkBar, .slimeAttkBar, .snakeAttkBar {
+.mageAttkBar, .archerAttkBar, .warAttkBar, .dinoAttkBar, .slimeAttkBar, .snakeAttkBar, .lizAttkBar, .dragAttkBar {
     width: 1%;
     height: 7.5px;
     background-color: red;
@@ -91,3 +63,7 @@ input {
 .currentTarget {
     color: #FFFFFF
 }
+
+/* .lizAttkBar, .lizHpBar, .dragAttkBar, .dragHpBar, .dragon, .lizard {
+    display: none;
+} */

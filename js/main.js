@@ -12,19 +12,37 @@ const attackButton = document.querySelector(".attack");
 attackButton.addEventListener("click", ()=>{
     console.log("workerd")
 })
-
+const warriorHpBar = document.querySelector(".warHpBar")
 const warAttkBar = document.querySelector(".warAttkBar")
+
 const archerAttkBar = document.querySelector(".archerAttkBar")
+const archerHpBar = document.querySelector(".archerHpBar")
+
+const mageHpBar = document.querySelector(".mageHpBar")
 const mageAttkBar = document.querySelector(".mageAttkBar")
+
+
+const dinoTag = document.querySelector(".dino")
+const dinoHpBar = document.querySelector(".dinoHpBar")
 const dinoAttkBar = document.querySelector(".dinoAttkBar")
-const slimeAttkBar = document.querySelector(".slimeAttkBar")
+
+const snakeTag = document.querySelector(".snake")
 const snakeAttkBar = document.querySelector(".snakeAttkBar")
 const snakeHpBar = document.querySelector(".snakeHpBar")
+const slimeTag = document.querySelector(".slime")
 const slimeHpBar = document.querySelector(".slimeHpBar")
-const dinoHpBar = document.querySelector(".dinoHpBar")
-const warriorHpBar = document.querySelector(".warHpBar")
-const archerHpBar = document.querySelector(".archerHpBar")
-const mageHpBar = document.querySelector(".mageHpBar")
+const slimeAttkBar = document.querySelector(".slimeAttkBar")
+
+const lizTag = document.querySelector(".lizard")
+const lizHpBar = document.querySelector(".lizHpBar")
+const lizAttkBar = document.querySelector(".lizAttkBar")
+
+const dragonTag = document.querySelector(".dragon")
+const dragHpBar = document.querySelector(".dragHpBar")
+const dragAttkBar = document.querySelector(".dragAttkBar")
+
+
+
 
 // let dinoHp = 100;
 // let slimeHp = 100;
@@ -105,14 +123,35 @@ const game = {
     score: 0,
     target:"",
     CPUtarget: ["warrior", "archer", "mage"],
+    finalBoss: false,
 
-    
-
-    
-    checkDead() {
-       
+    update(){
+        this.deadEnemy();
+        this.newWave();
+    },
+    newWave() {
+        if (dino.alive === false && slime.alive===false && snake.alive === false){
+            this.finalBoss = true;
+        } 
+    },
+    deadEnemy(){
+        if (dino.alive===false)
+        {
+            dinoTag.style.display = "none";
+            dinoAttkBar.style.display = "none";
+            dinoHpBar.style.display = "none";
+        } 
+        if (slime.alive===false){
+            slimeTag.style.display = "none";
+            slimeAttkBar.style.display = "none";
+            slimeHpBar.style.display = "none";
+        } 
+        if (snake.alive===false){
+            snakeTag.style.display = "none";
+            snakeAttkBar.style.display = "none";
+            snakeHpBar.style.display = "none";
+        }
     }
-
 }
 
 
@@ -120,29 +159,29 @@ const game = {
 
 addEventListener("click", function(event){
     console.log(event.x,event.y)
-    if (event.x > 398 && event.x < 524 && event.y < 452 && event.y > 403) {
+    if (event.x > 398 && event.x < 524 && event.y < 452 && event.y > 403 && dino.alive===true) {
         currentTarget.innerText = "Current Target: Dino.";
         game.target = "Dino";
-    } else if (event.x > 520 && event.x < 601 && event.y < 385 && event.y > 335) {
+    } else if (event.x > 520 && event.x < 601 && event.y < 385 && event.y > 335 && slime.alive===true) {
         currentTarget.innerText = "Current Target: Slime.";
         game.target = "Slime";
-    } else if (event.x > 519 && event.x < 608 && event.y < 493 && event.y > 445) {
+    } else if (event.x > 519 && event.x < 608 && event.y < 493 && event.y > 445 && snake.alive===true) {
         currentTarget.innerText = "Current Target: Snake.";
         game.target = "Snake";
     }
 })
 // Dragon and Lizard event listeners.
 
-// addEventListener("click", function(event){
-//     if (event.x > 382 && event.x < 565 && event.y < 458 && event.y > 327) {
-//         console.log("You clicked the dragon")
-//     } else if (event.x > 549 && event.x < 692 && event.y < 388 && event.y > 293) {
-//         console.log("You clicked the lizard.")
-//     }
-//         // mouse.x = event.clientX;
-//     // mouse.y = event.clientY;
-//     console.log(event.x,event.y)
-// })
+addEventListener("click", function(event){
+    if (event.x > 382 && event.x < 565 && event.y < 458 && event.y > 327 && game.finalBoss ===true) {
+        console.log("You clicked the dragon")
+    } else if (event.x > 549 && event.x < 692 && event.y < 388 && event.y > 293 && game.finalBoss ===true) {
+        console.log("You clicked the lizard.")
+    }
+        // mouse.x = event.clientX;
+    // mouse.y = event.clientY;
+    console.log(event.x,event.y)
+})
 
 // window.addEventListener("click", (e)=>{
 //     console.log(e.target);
@@ -181,24 +220,24 @@ function Keyboarder() {
     let enemies = [
     
         [
-            lizard = new Enemy(1240,453,5,3,canvas.width*.25,210,"lizard",.75)
+            lizard = new Enemy(1240,453,5,3,canvas.width*.25,210,"lizard",1,.75,10)
         ],
         [
-            dragon = new Enemy(1290,1045,5,5,canvas.width*.06,225,"dragon",.50)
+            dragon = new Enemy(1290,1045,5,5,canvas.width*.06,225,"dragon",1,.50,20)
         ],
         [
-           slime = new Enemy(705,535,5,5,canvas.width*.25,245,"slime",3,1)
+           slime = new Enemy(705,535,5,5,canvas.width*.25,245,"slime",3,1,4)
         ],
         [
-            snake = new Enemy(735,376,5,4,canvas.width*.25,370,"snake",1,1.25)
+            snake = new Enemy(735,376,5,4,canvas.width*.25,370,"snake",1,1.25,5)
         ],
         [
-            dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino",2,.75)
+            dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino",2,.75,3)
         ],
     ]
-    warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,.75);
-    archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer",4,1.50)
-    mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,.50)
+    warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,.75,5);
+    archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer",4,1.50,3)
+    mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,.50,10)
     // enemy = new Enemy(enemies[ran][0],enemies[ran][1],enemies[ran][2],enemies[ran][3],enemies[0][4],enemies[0][5],
     //     enemies[ran][6],enemies[ran][7]);
     // enemy2 = new Enemy(enemies[ran][0],enemies[ran][1],enemies[ran][2],enemies[ran][3],enemies[ran][4],enemies[ran][5],
@@ -217,13 +256,15 @@ const animate2 = setInterval(function(){
     warrior.update();
     mage.update();
     archer.update();
-    // lizard.update();
-    // dragon.update();
+    if (game.finalBoss ===true){
+        lizard.update();
+        dragon.update();
+    } else {
     slime.update();
     snake.update();
-    dino.update();
+    dino.update();}
+    game.update();
     hit = false;
-    
 }, 100)
 //  
 
