@@ -8,7 +8,7 @@ let hit = false;
 
 
 // Player
-function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkSpeed) {
+function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRate) {
     this.srcX; 
     this.srcY;
     this.attackPos = attackPos;
@@ -22,107 +22,78 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkS
     this.currentFrame = 0;
     this.image = new Image();
     this.image.src;
-    // archer.image.src = imgs/sprities[3];
-    // mage.image.src = imgs/sprities[4];
     this.name = name;
     this.x = x;
     this.y = y;
     this.attackReady = false;
-    this.attkSpeed = attkSpeed;
-    // this.dx = 0;
-    // this.dy = 0;
-    // this.radius = 40;
-    this.hp = 10;
+    this.attkSpeed = 1;
+    this.attkRate = attkRate;
+    this.strength = 5;
+    this.hp = 100;
     this.keyboarder = new Keyboarder();
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
     }
-// Movement
+// Motion
     this.playerMotion = function() {
         if (this.attackReady === false)
         {this.currentFrame = ++this.currentFrame % this.cols;
         this.srcX = this.currentFrame * this.frameWidth;
         this.srcY = this.idlePos * this.frameHeight;}
-        
-        // if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
-        //     // console.log("left key press")
-        //     this.image.src = imgs/sprities[2];
-        //     this.x -=4 ;
-        // } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
-        //     this.image.src = imgs/sprities[3];
-        //     this.x += 4;
-        // }  else if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
-        //     srcY = attackPos * this.frameHeight;
-        //     this.attack();
-        // } /*else if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
-            
-        //     this.y -= 4;
-        // } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN)) {
-
-        //     this.y += 4;
-        // } */else {
-            
-        // }
     }
+// Full player update
     this.update = function() {
         this.playerImage();
         this.playerMotion();
         this.draw();
-        this.attack();
-        // this.attackFrame();
+        this.playerBars();
+        this.attackFrame();
+        
 
     }
-    // this.attackFrame = function() {
-    //     if (width >= 100) {
-    //         this.attackReady = true;
-    //         // warrior.attackReady = true;
-    //         // archer.attackReady = true;
-    //         // mage.attackReady = true;
-    //         // clearInterval(id);
-    //         width = 1;
-    //         warAttkBar.style.width = width + '%'; 
-    //         archerAttkBar.style.width = width + '%'; 
-    //         mageAttkBar.style.width = width + '%';
-    //     } else {
-    //         width++; 
-    //         warAttkBar.style.width = width + '%'; 
-    //         archerAttkBar.style.width = width + '%'; 
-    //         mageAttkBar.style.width = width + '%'; 
-    //     }
-    // }
-    this.attack = function() {
+    this.playerBars = function() {
+        if (this.attkSpeed >= 100) {
+            this.attackReady = true;
+            this.attack();
+            this.attkSpeed = 1;
+            warAttkBar.style.width = this.attkSpeed + '%' 
+            archerAttkBar.style.width = this.attkSpeed + '%'; 
+            mageAttkBar.style.width = this.attkSpeed + '%'; 
+        } else {
+            this.attkSpeed+= this.attkRate; 
+            warAttkBar.style.width = warrior.attkSpeed + '%'
+            archerAttkBar.style.width = archer.attkSpeed + '%'; 
+            mageAttkBar.style.width = mage.attkSpeed + '%';
+        }
+    }
+    this.attackFrame = function() {
         //auto attack
         //
-        if (this.attackReady === true)
-        {this.currentFrame = ++this.currentFrame % this.cols;
-        this.srcX = this.currentFrame * this.frameWidth;
-        this.srcY = this.attackPos * this.frameHeight;
+        if (this.attackReady === true){
+            
+            this.currentFrame = ++this.currentFrame % this.cols;
+            this.srcX = this.currentFrame * this.frameWidth;
+            this.srcY = this.attackPos * this.frameHeight;
+            
         setTimeout(()=> {
             this.attackReady = false
-        }, 750)
+            }, 750)
         }
         
-        // if (this.name === "warrior") {
-        //     this.image.src =imgs[0]  
-        // } else if (this.name === "archer") {
-        //     this.image.src = imgs[1]
-        // } else if (this.name === "mage") {
-        //     this.image.src = imgs[2]
-        // }
-        
-
-        // for (let i = 0; i <enemies.length; i++) {
-        //     if (player1.x < enemies[i].x + enemies[i].frameWidth-100&&
-        //         player1.x + player1.frameWidth-50> enemies[i].x){
-        //         console.log("has hit!")
-        //         enemies[i].hp -= this.attackValue;
-        //         hit = true;
-        //     } else {
-                
-        //     }
-        // }
     }
-
+    this.attack = function(){
+        if (game.target=== "Dino") {
+            console.log("hit Dino")
+            dinoHpBar.style.width = `${dino.hp -= this.strength}%`;
+        } else if (game.target==="Slime") {
+            console.log("hit Slime")
+            slimeHpBar.style.width = `${slime.hp -= this.strength}%`;
+        } else if (game.target==="Snake") {
+            console.log("hit Snake")
+            snakeHpBar.style.width = `${snake.hp -= this.strength}%`;
+        } 
+    }
+    
     this.playerImage = function() {
         if (this.name === "warrior") {
             this.image.src =imgs[0]  
@@ -138,7 +109,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkS
 
 
 // Enemies
-function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name) {
+function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRate) {
     this.srcX; 
     this.srcY;
     this.attackPos = 1;
@@ -157,49 +128,78 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name) {
     this.name = name;
     this.x = x;
     this.y = y;
-    this.attackValue = 2;
+    this.attackReady = false;
+    this.attkSpeed = 1;
+    this.attkRate = attkRate;
+    this.strength = 5;
+    this.attackPos = attackPos;
     // this.dx = 0;
     // this.dy = 0;
     // this.radius = 40;
-    this.hp = 10;
+    this.hp = 100;
     this.keyboarder = new Keyboarder();
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
     }
 // Movement
     this.enemyMotion = function() {
-        this.currentFrame = ++this.currentFrame % this.cols;
+        if (this.attackReady===false)
+        {this.currentFrame = ++this.currentFrame % this.cols;
         this.srcX = this.currentFrame * this.frameWidth;
-        this.srcY = this.idlePos * this.frameHeight;
-        
-        // if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
-        //     // console.log("left key press")
-        //     this.image.src = imgs/sprities[2];
-        //     this.x -=4 ;
-        // } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
-        //     this.image.src = imgs/sprities[3];
-        //     this.x += 4;
-        // }  else if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
-        //     srcY = attackPos * this.frameHeight;
-        //     this.attack();
-        // } /*else if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
-            
-        //     this.y -= 4;
-        // } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN)) {
-
-        //     this.y += 4;
-        // } */else {
-            
-        // }
+        this.srcY = this.idlePos * this.frameHeight;}
     }
     this.update = function() {
         this.enemyImage();
         this.enemyMotion();
         this.draw();
+        this.enemyBars();
+        this.attackFrame();
         
 
     }
+    this.enemyBars = function() {
+        if (this.attkSpeed >= 100) {
+            this.attackReady = true;
+            this.attack();
+            this.attkSpeed = 1;
+            dinoAttkBar.style.width = this.attkSpeed + '%'; 
+            slimeAttkBar.style.width = this.attkSpeed + '%'; 
+            snakeAttkBar.style.width = this.attkSpeed + '%'; 
+        } else {
+            this.attkSpeed+= this.attkRate; 
+            dinoAttkBar.style.width = dino.attkSpeed + '%'; 
+            slimeAttkBar.style.width = slime.attkSpeed + '%'; 
+            snakeAttkBar.style.width = snake.attkSpeed + '%'; 
+
+        }
+    }
+    
+    this.attackFrame = function() {
+        if (this.attackReady === true){
+            this.currentFrame = ++this.currentFrame % this.cols;
+            this.srcX = this.currentFrame * this.frameWidth;
+            this.srcY = this.attackPos * this.frameHeight;
+            
+        setTimeout(()=> {
+            this.attackReady = false;
+            }, 670)
+        }
+        
+    }
     this.attack = function() {
+        // for (let i =0; i < game.CPUtarget.length; i++){
+            let random = Math.floor(Math.random()*3);
+            if (game.CPUtarget[random]==="warrior"){
+                warriorHpBar.style.width = `${warrior.hp -= this.strength}%`;
+                // console.log(`${this.name}hit the warrior`)
+            } else if (game.CPUtarget[random]==="archer"){
+                archerHpBar.style.width = `${archer.hp -= this.strength}%`;
+                // console.log(`${this.name}hit the archer`)
+            } else if (game.CPUtarget[random]==="mage"){
+                mageHpBar.style.width = `${mage.hp -= this.strength}%`;
+                // console.log(`${this.name}hit the mage`)
+            }
+        // }
         // for (let i = 0; i <enemies.length; i++) {
         //     if (player1.x < enemies[i].x + enemies[i].frameWidth-100&&
         //         player1.x + player1.frameWidth-50> enemies[i].x){

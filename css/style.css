@@ -83,7 +83,7 @@ input {
     display: flex;
   }
 
-.mageAttkBar, .archerAttkBar, .warAttkBar {
+.mageAttkBar, .archerAttkBar, .warAttkBar, .dinoAttkBar, .slimeAttkBar, .snakeAttkBar {
     width: 1%;
     height: 7.5px;
     background-color: red;

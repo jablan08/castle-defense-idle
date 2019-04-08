@@ -12,66 +12,91 @@ const attackButton = document.querySelector(".attack");
 attackButton.addEventListener("click", ()=>{
     console.log("workerd")
 })
+
 const warAttkBar = document.querySelector(".warAttkBar")
 const archerAttkBar = document.querySelector(".archerAttkBar")
 const mageAttkBar = document.querySelector(".mageAttkBar")
-let warWidth = 1;
-let archerWidth= 1;
-let mageWidth= 1;
-var id = setInterval(warFrame, 100);
-var id = setInterval(archerFrame, 100);
-var id = setInterval(mageFrame, 100);
-function warFrame() {
-if (warrior.attkSpeed >= 100) {
-    warrior.attackReady = true;
-    // archer.attackReady = true;
-    // mage.attackReady = true;
-    // clearInterval(id);
-    warrior.attkSpeed = 1;
-    warAttkBar.style.width = warrior.attkSpeed + '%'; 
-    // archerAttkBar.style.width = width + '%'; 
-    // mageAttkBar.style.width = width + '%';
-    } else {
-      warrior.attkSpeed+=.75; 
-      warAttkBar.style.width = warrior.attkSpeed + '%'; 
-    //   archerAttkBar.style.width = width + '%'; 
-    //   mageAttkBar.style.width = width + '%'; 
-    }
-}
-function archerFrame() {
-if (archer.attkSpeed >= 100) {
-    // warrior.attackReady = true;
-    archer.attackReady = true;
-    // mage.attackReady = true;
-    // clearInterval(id);
-    archer.attkSpeed = 1;
-    // warAttkBar.style.width = width + '%'; 
-    archerAttkBar.style.width = archer.attkSpeed + '%'; 
-    // mageAttkBar.style.width = width + '%';
-    } else {
-      archer.attkSpeed+=1.5; 
-    //   warAttkBar.style.width = width + '%'; 
-      archerAttkBar.style.width = archer.attkSpeed + '%'; 
-    //   mageAttkBar.style.width = width + '%'; 
-    }
-}
-function mageFrame() {
-if (mage.attkSpeed >= 100) {
-    // warrior.attackReady = true;
-    // archer.attackReady = true;
-    mage.attackReady = true;
-    // clearInterval(id);
-    mage.attkSpeed=1;
-    // warAttkBar.style.width = width + '%'; 
-    // archerAttkBar.style.width = width + '%'; 
-    mageAttkBar.style.width = mage.attkSpeed + '%';
-    } else {
-      mage.attkSpeed+=.50; 
-    //   warAttkBar.style.width = width + '%'; 
-    //   archerAttkBar.style.width = width + '%'; 
-      mageAttkBar.style.width = mage.attkSpeed + '%'; 
-    }
-}
+const dinoAttkBar = document.querySelector(".dinoAttkBar")
+const slimeAttkBar = document.querySelector(".slimeAttkBar")
+const snakeAttkBar = document.querySelector(".snakeAttkBar")
+const snakeHpBar = document.querySelector(".snakeHpBar")
+const slimeHpBar = document.querySelector(".slimeHpBar")
+const dinoHpBar = document.querySelector(".dinoHpBar")
+const warriorHpBar = document.querySelector(".warHpBar")
+const archerHpBar = document.querySelector(".archerHpBar")
+const mageHpBar = document.querySelector(".mageHpBar")
+
+// let dinoHp = 100;
+// let slimeHp = 100;
+// let snakeHp = 100;
+// var id = setInterval(warFrame, 100);
+// var id = setInterval(archerFrame, 100);
+// var id = setInterval(mageFrame, 100);
+// function warFrame() {
+// if (warrior.attkSpeed >= 100) {
+//     warrior.attackReady = true;
+//     warrior.attack();
+//     // archer.attackReady = true;
+//     // mage.attackReady = true;
+//     // clearInterval(id);
+//     warrior.attkSpeed = 1;
+//     warAttkBar.style.width = warrior.attkSpeed + '%'; 
+//     // archerAttkBar.style.width = width + '%'; 
+//     // mageAttkBar.style.width = width + '%';
+// } else {
+//       warrior.attkSpeed+=.75; 
+//       warAttkBar.style.width = warrior.attkSpeed + '%'; 
+//     //   archerAttkBar.style.width = width + '%'; 
+//     //   mageAttkBar.style.width = width + '%'; 
+// }
+// if (archer.attkSpeed >= 100) {
+//     archer.attackReady = true;
+//     archer.attack();
+//     archer.attkSpeed = 1;
+//     archerAttkBar.style.width = archer.attkSpeed + '%'; 
+// } else {
+//       archer.attkSpeed+=1.5;
+//       archerAttkBar.style.width = archer.attkSpeed + '%';
+// }
+// if (mage.attkSpeed >= 100) {
+//     mage.attack();
+//     mage.attackReady = true;
+//     mage.attkSpeed=1;
+//     mageAttkBar.style.width = mage.attkSpeed + '%';
+//     } else {
+//       mage.attkSpeed+=.50; 
+//       mageAttkBar.style.width = mage.attkSpeed + '%'; 
+//     }
+// }
+// // function archerFrame() {
+// // if (archer.attkSpeed >= 100) {
+// //     archer.attackReady = true;
+// //     archer.attack();
+// //     archer.attkSpeed = 1;
+// //     archerAttkBar.style.width = archer.attkSpeed + '%'; 
+// // } else {
+// //       archer.attkSpeed+=1.5;
+// //       archerAttkBar.style.width = archer.attkSpeed + '%';
+// // }
+// // }
+// function mageFrame() {
+// if (mage.attkSpeed >= 100) {
+//     mage.attack();
+//     // warrior.attackReady = true;
+//     // archer.attackReady = true;
+//     mage.attackReady = true;
+//     // clearInterval(id);
+//     mage.attkSpeed=1;
+//     // warAttkBar.style.width = width + '%'; 
+//     // archerAttkBar.style.width = width + '%'; 
+//     mageAttkBar.style.width = mage.attkSpeed + '%';
+//     } else {
+//       mage.attkSpeed+=.50; 
+//     //   warAttkBar.style.width = width + '%'; 
+//     //   archerAttkBar.style.width = width + '%'; 
+//       mageAttkBar.style.width = mage.attkSpeed + '%'; 
+//     }
+// }
 
 // Game checker
 
@@ -79,6 +104,7 @@ const game = {
     wave: 1,
     score: 0,
     target:"",
+    CPUtarget: ["warrior", "archer", "mage"],
 
     
 
@@ -96,13 +122,13 @@ addEventListener("click", function(event){
     console.log(event.x,event.y)
     if (event.x > 398 && event.x < 524 && event.y < 452 && event.y > 403) {
         currentTarget.innerText = "Current Target: Dino.";
-        target = "Dino";
+        game.target = "Dino";
     } else if (event.x > 520 && event.x < 601 && event.y < 385 && event.y > 335) {
         currentTarget.innerText = "Current Target: Slime.";
-        target = "Slime";
+        game.target = "Slime";
     } else if (event.x > 519 && event.x < 608 && event.y < 493 && event.y > 445) {
         currentTarget.innerText = "Current Target: Snake.";
-        target = "Snake";
+        game.target = "Snake";
     }
 })
 // Dragon and Lizard event listeners.
@@ -155,19 +181,19 @@ function Keyboarder() {
     let enemies = [
     
         [
-            lizard = new Enemy(1240,453,5,3,canvas.width*.25,210,"lizard")
+            lizard = new Enemy(1240,453,5,3,canvas.width*.25,210,"lizard",.75)
         ],
         [
-            dragon = new Enemy(1290,1045,5,5,canvas.width*.06,225,"dragon")
+            dragon = new Enemy(1290,1045,5,5,canvas.width*.06,225,"dragon",.50)
         ],
         [
-           slime = new Enemy(705,535,5,5,canvas.width*.25,245,"slime")
+           slime = new Enemy(705,535,5,5,canvas.width*.25,245,"slime",3,1)
         ],
         [
-            snake = new Enemy(735,376,5,4,canvas.width*.25,370,"snake")
+            snake = new Enemy(735,376,5,4,canvas.width*.25,370,"snake",1,1.25)
         ],
         [
-            dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino")
+            dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino",2,.75)
         ],
     ]
     warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,.75);
