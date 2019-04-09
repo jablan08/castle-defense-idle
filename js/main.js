@@ -254,6 +254,7 @@ attackButton.addEventListener("click", ()=>{
         warrior.allAttack();
         archer.allAttack();
         mage.allAttack();
+        specialBar.style.animation = "";
         if (game.finalBoss === false) {
             dinoHpBar.style.width = `${dino.hp -= 20}%`;
             slimeHpBar.style.width = `${slime.hp -= 20}%`;
@@ -269,6 +270,7 @@ itemButton.addEventListener("click", ()=>{
     if (game.healReady===true) {
         mage.healthGain();
         body.style.animation = "healFlash 2s";
+        healBar.style.animation = "";
         setTimeout(()=>{
             body.style.animation = "";
         }, 2000)

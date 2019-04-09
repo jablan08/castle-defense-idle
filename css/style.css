@@ -89,6 +89,11 @@ input {
     from { background-color: green;}
     to { background-color: black;}
 }
+@keyframes readyFlash {
+    from { background-color:rgb(240, 6, 6);}
+    to { background-color: yellow;}
+}
+
 #splashScreen {
 
     height: 100vh;
@@ -133,7 +138,6 @@ input {
     height: 5px;
     background-color: rgb(252, 236, 17);
     margin: 2px;
-    
 }
 
 .winner, .loser {

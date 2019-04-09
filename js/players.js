@@ -84,14 +84,14 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     this.specialHealBars = function (){
         if (this.special>=100){
             game.specialReady = true;
-            
+            specialBar.style.animation = "readyFlash .5s infinite";
         } else {
             this.special +=.25
             specialBar.style.width = this.special + '%' 
         }
         if (this.heal >=100){
             game.healReady = true;
-            
+            healBar.style.animation = "readyFlash .5s infinite";
         } else {
             this.heal +=.15
             healBar.style.width = this.heal + '%' 
