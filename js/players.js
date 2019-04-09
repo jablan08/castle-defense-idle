@@ -2,10 +2,6 @@
 
 const imgs = ["imgs/sprites/war.spread.png", "imgs/sprites/archer.png", "imgs/sprites/mage.png"];
 const enemyImgs = ["imgs/sprites/enemy.lizard.png", "imgs/sprites/enemy.dragon.png","imgs/sprites/enemy.slime.png","imgs/sprites/enemy.snake.png", "imgs/sprites/enemy.dino.png"];
-let hit = false;
-
-
-
 
 // Player
 function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRate,strength) {
@@ -33,6 +29,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     this.heal = 1;
     this.alive = true;
     this.hp = 100;
+// Create sprite image    
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
     }
@@ -54,8 +51,8 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
         this.checkDead();
         this.specialHealBars();
         }
-
     }
+
     this.checkDead = function(){
         if (this.hp <= 0){
             this.alive = false;  
@@ -65,6 +62,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
             game.playersDead = true;
         }
     }
+
     this.playerBars = function() {
         if (this.attkSpeed >= 100) {
             this.attackReady = true;
@@ -86,17 +84,18 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
             game.specialReady = true;
             specialBar.style.animation = "readyFlash .5s infinite";
         } else {
-            this.special +=.25
+            this.special +=.25;
             specialBar.style.width = this.special + '%' 
         }
         if (this.heal >=100){
             game.healReady = true;
             healBar.style.animation = "readyFlash .5s infinite";
         } else {
-            this.heal +=.15
+            this.heal +=.20;
             healBar.style.width = this.heal + '%' 
         }
     }
+
     this.allAttack = function() {
         game.specialReady = false;
         this.special = 1;
@@ -109,23 +108,15 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
         setTimeout(()=> {
             this.attackReady = false
             }, 750)
-        
-        
-        
     }
     this.healthGain = function() {
         game.healReady = false;
         this.heal = 1;
-        healBar.style.width = this.heal + '%' 
-        warriorHpBar.style.width = `${warrior.hp += 30}%`
-        archerHpBar.style.width = `${archer.hp += 30}%`
-        mageHpBar.style.width = `${mage.hp += 30}%`
+        healBar.style.width = this.heal + '%';
         this.alive = true;
     }
 
     this.attackFrame = function() {
-        //auto attack
-        //
         if (this.attackReady === true){
             
             this.currentFrame = ++this.currentFrame % this.cols;
@@ -162,10 +153,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
             this.image.src = imgs[2]
         }
     }
-
 }
-
-
 
 // Enemies
 function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRate,strength) {
@@ -191,15 +179,18 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
     this.attackPos = attackPos;
     this.alive = true;
     this.hp = 100;
+
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
     }
+
     this.enemyMotion = function() {
         if (this.attackReady===false)
         {this.currentFrame = ++this.currentFrame % this.cols;
         this.srcX = this.currentFrame * this.frameWidth;
         this.srcY = this.idlePos * this.frameHeight;}
     }
+
     this.update = function() {
         if (this.alive ===true){
         this.enemyImage();
@@ -210,6 +201,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
         this.checkDead();
         }
     }
+
     this.enemyBars = function() {
         if (this.attkSpeed >= 100) {
             this.attackReady = true;
@@ -238,8 +230,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
             setTimeout(()=> {
             this.attackReady = false;
             }, 670)
-        }
-        
+        }  
     }
 
     this.attack = function() {
@@ -252,6 +243,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
             mageHpBar.style.width = `${mage.hp -= this.strength}%`;
         }
     }
+
     this.checkDead = function(){
         if (this.hp <= 0){
             this.alive = false;
@@ -260,6 +252,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
             game.deadEnemy();
         } 
     }
+    
     this.enemyImage = function() {
         if (this.name === "lizard") {
             this.image.src =enemyImgs[0]  

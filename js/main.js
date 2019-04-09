@@ -10,7 +10,7 @@ const currentTarget = document.querySelector(".currentTarget");
 const startButton = document.getElementById("startButton");
 const playAgainButton = document.getElementById("playAgainButton");
 const attackButton = document.querySelector(".attack");
-const itemButton = document.querySelector(".items");
+const healButton = document.querySelector(".items");
 const healBar = document.querySelector(".healBar")
 const specialBar = document.querySelector(".specialBar");
 
@@ -60,7 +60,6 @@ const dragAttkBar = document.querySelector(".dragAttkBar");
 // Game checker
 
 const game = {
-   
     mobs: 5,
     wave() {
             wave.innerText = `Enemies remaining: ${this.mobs}`
@@ -76,29 +75,28 @@ const game = {
     gameOver(){
         if (this.playersDead === true){
             setTimeout(()=>{
-            this.run = false;
-            title.innerText = "GAME OVER";
-            container.style.animation = "fadeout 2s";
-            container.style.display = "none";
-            splashScreen.style.display = "block";
-            splashScreen.style.animation = "fadein 3s";
-            playAgainButton.style.display = "inline";
-            loser.style.display = "block";
+                this.run = false;
+                title.innerText = "GAME OVER";
+                container.style.animation = "fadeout 2s";
+                container.style.display = "none";
+                splashScreen.style.display = "block";
+                splashScreen.style.animation = "fadein 3s";
+                playAgainButton.style.display = "inline";
+                loser.style.display = "block";
             }, 1000)
         } else {
             setTimeout(()=>{
-            this.run = false;
-            title.innerText = "HOOORAYYYY!";
-            container.style.animation = "fadeout 3.5s";
-            container.style.display = "none";
-            splashScreen.style.display = "block";
-            splashScreen.style.animation = "fadein 3s";
-            playAgainButton.style.display = "inline";
-            playAgainButton.innerText = "DEFEND AGAIN?"
-            winner.style.display = "block";
-        }, 1000)
-    }
-        
+                this.run = false;
+                title.innerText = "HOOORAYYYY!";
+                container.style.animation = "fadeout 3.5s";
+                container.style.display = "none";
+                splashScreen.style.display = "block";
+                splashScreen.style.animation = "fadein 3s";
+                playAgainButton.style.display = "inline";
+                playAgainButton.innerText = "DEFEND AGAIN?"
+                winner.style.display = "block";
+            }, 1000)
+        }
     },
     update(){
         if (this.mobs === 2 && this.finalBoss === false) {
@@ -108,8 +106,8 @@ const game = {
         } else if (this.mobs === 0 || this.playersDead === true){
             this.gameOver();
         }
-
     },
+
     newWave() {
         this.run = false;
         this.finalBoss = true;
@@ -124,11 +122,9 @@ const game = {
         dragonTag.style.display = "block";
         dragAttkBar.style.display = "block";
         dragHpBar.style.display = "block";
-
         lizTag.style.display = "block";
         lizAttkBar.style.display = "block";
         lizHpBar.style.display = "block";
-
     },
     deadPlayer() {
         if (warrior.alive===false){
@@ -159,7 +155,7 @@ const game = {
                 currentTarget.innerText = "Current Target: Slime";
                 game.target = "Slime"
             }
-        } 
+        }; 
         if (slime.alive===false){
             slimeTag.style.display = "none";
             slimeAttkBar.style.display = "none";
@@ -171,7 +167,7 @@ const game = {
                 currentTarget.innerText = "Current Target: Dino";
                 game.target = "Dino"
             }
-        } 
+        }; 
         if (snake.alive===false){
             snakeTag.style.display = "none";
             snakeAttkBar.style.display = "none";
@@ -183,7 +179,7 @@ const game = {
                 currentTarget.innerText = "Current Target: Slime";
                 game.target = "Slime"
             }
-        }
+        };
         if (lizard.alive===false){
             lizTag.style.display = "none";
             lizAttkBar.style.display = "none";
@@ -201,10 +197,9 @@ const game = {
                 currentTarget.innerText = "Current Target: Lizard";
                 game.target = "Lizard";
             }
-        }
+        };
     }
 }
-
 
 //  Event listeners 
 
@@ -244,11 +239,12 @@ startButton.addEventListener("click", ()=>{
         splashScreen.style.animation = "";
         container.style.display = "block";
     },1000)
-   
 })
+
 playAgainButton.addEventListener("click", ()=>{
     window.location.reload();
 })
+
 attackButton.addEventListener("click", ()=>{
     if (game.specialReady===true) {
         warrior.allAttack();
@@ -266,16 +262,33 @@ attackButton.addEventListener("click", ()=>{
     }
 })
 
-itemButton.addEventListener("click", ()=>{
+healButton.addEventListener("click", ()=>{
     if (game.healReady===true) {
         mage.healthGain();
-        body.style.animation = "healFlash 2s";
+        warrior.healthGain();
+        archer.healthGain();
         healBar.style.animation = "";
+        body.style.animation = "healFlash 2s";
+        if (warrior.hp >= 70) {
+            warriorHpBar.style.width = `${warrior.hp =100}%`
+        } else {
+            warriorHpBar.style.width = `${warrior.hp += 30}%`
+        }
+        if (archer.hp >= 70) {
+            archerHpBar.style.width = `${archer.hp = 100}%`
+        } else {
+            archerHpBar.style.width = `${archer.hp += 30}%`
+        } if (mage.hp >= 70) {
+            mageHpBar.style.width = `${mage.hp = 100}%`
+        } else {
+            mageHpBar.style.width = `${mage.hp += 30}%`
+        }
         setTimeout(()=>{
             body.style.animation = "";
         }, 2000)
     }
 })
+
 // Sprites 
 let enemies = [
     [
@@ -304,10 +317,10 @@ mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,.50,15)
 const animate2 = setInterval(function(){
     cxt.clearRect(0,0, innerWidth,innerHeight);
     if (game.run === true){
-    warrior.update();
-    mage.update();
-    archer.update();
-    game.update();
+        warrior.update();
+        mage.update();
+        archer.update();
+        game.update();
         if (game.finalBoss ===true){
             lizard.update();
             dragon.update();
@@ -316,7 +329,7 @@ const animate2 = setInterval(function(){
             snake.update();
             dino.update();
         }     
-    } 
+    }; 
 }, 100)
 
 

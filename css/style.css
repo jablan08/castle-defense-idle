@@ -37,7 +37,7 @@ input {
 .characterHP, .enemyHP {
     width: 150px;
     background-color:#4c6af0;
-    border: .5px solid white;
+    border: 2px solid white;
     color: #FFFFFF;
     height: 100%;
     
