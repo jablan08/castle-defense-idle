@@ -14,6 +14,7 @@ const healButton = document.querySelector(".items");
 const healBar = document.querySelector(".healBar")
 const specialBar = document.querySelector(".specialBar");
 
+
 const title = document.querySelector(".title");
 const sireMsg = document.querySelector(".sireMsg");
 const splashContent = document.querySelector(".splash-content")
@@ -23,6 +24,7 @@ const body = document.querySelector("body");
 const container = document.querySelector(".container");
 const screen = document.getElementById("screen");
 const splashScreen = document.getElementById("splashScreen")
+const idleImgs = document.querySelector(".idleImgs");
 
 const warTag = document.querySelector(".warTag");
 const warriorHpBar = document.querySelector(".warHpBar");
@@ -239,12 +241,13 @@ startButton.addEventListener("click", ()=>{
         sireMsg.style.display = "none";
         splashScreen.style.animation = "";
         container.style.display = "block";
+        idleImgs.style.display = "none";
     },1000)
-})
+});
 
 playAgainButton.addEventListener("click", ()=>{
     window.location.reload();
-})
+});
 
 attackButton.addEventListener("click", ()=>{
     if (game.specialReady===true) {
@@ -261,7 +264,7 @@ attackButton.addEventListener("click", ()=>{
             dragHpBar.style.width = `${dragon.hp -= 20}%`
         }
     }
-})
+});
 
 healButton.addEventListener("click", ()=>{
     if (game.healReady===true) {
@@ -288,7 +291,7 @@ healButton.addEventListener("click", ()=>{
             body.style.animation = "";
         }, 2000)
     }
-})
+});
 
 // Sprites 
 let enemies = [
@@ -309,8 +312,8 @@ let enemies = [
     ],
 ]
 warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,.75,10);
-archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer",4,1.50,5.5)
-mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,.50,15)
+archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer",4,1.50,5.5);
+mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,.50,15);
 
 // Interval update
 const animate2 = setInterval(function(){

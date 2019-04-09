@@ -124,12 +124,13 @@ input {
     color:#f00909
 }
 #startButton {
-    margin: 90px;
+    margin: 0 auto;
     position: relative;
     font-size: 45px;
     font-family: 'Black Ops One', cursive;
     padding: 25px;
     border-radius: 25%;
+    display: block;
 }
 #startButton:hover, #playAgainButton:hover {
     background-color: #f50a0a;
@@ -159,4 +160,7 @@ input {
     font-family: 'Black Ops One', cursive;
     padding: 25px;
     border-radius: 25%;
+}
+.idleWar {
+    margin: -40px;
 }

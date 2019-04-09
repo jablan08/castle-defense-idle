@@ -28,7 +28,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     this.special = 1;
     this.heal = 1;
     this.alive = true;
-    this.hp = 100;
+    this.hp = 1;
 // Create sprite image    
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
