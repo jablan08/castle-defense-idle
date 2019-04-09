@@ -68,12 +68,16 @@ input {
     background-color: red;
 }
 .currentTarget {
-    color: #FFFFFF;
-    position: relative;
-    right: 18%;
-    font-family: 'Major Mono Display', monospace;
+    color: red;
+
+    font-family: 'Black Ops One', cursive;
 }
 
+.targeting {
+    color: #FFFFFF;
+
+    font-family: 'Major Mono Display', monospace;
+}
 .lizAttkBar, .lizHpBar, .dragAttkBar, .dragHpBar, .dragon, .lizard {
     display: none;
 }
@@ -163,4 +167,8 @@ input {
 }
 .idleWar {
     margin: -40px;
+}
+.targets {
+    flex: 0 70%;
+    text-align: center;
 }
