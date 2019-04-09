@@ -32,7 +32,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     this.special = 1;
     this.heal = 1;
     this.alive = true;
-    this.hp = 100;
+    this.hp = 1;
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
     }
@@ -58,7 +58,8 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     }
     this.checkDead = function(){
         if (this.hp <= 0){
-            this.alive = false;   
+            this.alive = false;  
+            game.deadPlayer(); 
         }
         if (warrior.alive === false && mage.alive === false && archer.alive === false){
             game.playersDead = true;
@@ -189,7 +190,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
     this.strength = strength;
     this.attackPos = attackPos;
     this.alive = true;
-    this.hp = 1;
+    this.hp = 100;
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
     }

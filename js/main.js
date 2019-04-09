@@ -23,12 +23,15 @@ const container = document.querySelector(".container");
 const screen = document.getElementById("screen");
 const splashScreen = document.getElementById("splashScreen")
 
+const warTag = document.querySelector(".warTag");
 const warriorHpBar = document.querySelector(".warHpBar");
 const warAttkBar = document.querySelector(".warAttkBar");
 
+const archerTag = document.querySelector(".archerTag");
 const archerAttkBar = document.querySelector(".archerAttkBar");
 const archerHpBar = document.querySelector(".archerHpBar");
 
+const mageTag = document.querySelector(".mageTag");
 const mageHpBar = document.querySelector(".mageHpBar");
 const mageAttkBar = document.querySelector(".mageAttkBar");
 
@@ -76,6 +79,8 @@ const game = {
             container.style.animation = "fadeout 2s";
             container.style.display = "none";
             splashScreen.style.display = "block";
+            splashScreen.style.animation = "fadein 3s";
+            playAgainButton.style.display = "inline";
             loser.style.display = "block";
             }, 1000)
         } else {
@@ -99,6 +104,7 @@ const game = {
         } else if (this.mobs === 0 || this.playersDead === true){
             this.gameOver();
         }
+
     },
     newWave() {
         this.run = false;
@@ -122,12 +128,17 @@ const game = {
     },
     deadPlayer() {
         if (warrior.alive===false){
+            warTag.style.display = "none";
             warAttkBar.style.display = "none";
             warriorHpBar.style.display = "none";
-        } else if (archer.alive===false){
+        } 
+        if (archer.alive===false){
+            archer.style.display = "none";
             archerAttkBar.style.display = "none";
             archerHpBar.style.display = "none";
-        } else if (mage.alive===false){
+        } 
+        if (mage.alive===false){
+            mage.style.display = "none";
             mageAttkBar.style.display = "none";
             mageHpBar.style.display = "none";
         }
