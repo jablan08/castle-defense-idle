@@ -116,10 +116,12 @@ input {
 
 }
 #startButton {
-    margin: 50px;
+    margin: 90px;
     position: relative;
     font-size: 45px;
     font-family: 'Black Ops One', cursive;
+    padding: 25px;
+    border-radius: 25%;
 }
 #startButton:hover, #playAgainButton:hover {
     background-color: #f50a0a;
@@ -144,8 +146,10 @@ input {
   }
 #playAgainButton {
     display: none;
-    margin: 50px;
+    margin: 90px;
     position: relative;
     font-size: 45px;
     font-family: 'Black Ops One', cursive;
+    padding: 25px;
+    border-radius: 25%;
 }

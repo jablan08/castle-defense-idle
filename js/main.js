@@ -14,6 +14,7 @@ const itemButton = document.querySelector(".items");
 const healBar = document.querySelector(".healBar")
 const specialBar = document.querySelector(".specialBar");
 
+const title = document.querySelector(".title");
 const sireMsg = document.querySelector(".sireMsg");
 const splashContent = document.querySelector(".splash-content")
 const winner = document.querySelector(".winner");
@@ -76,6 +77,7 @@ const game = {
         if (this.playersDead === true){
             setTimeout(()=>{
             this.run = false;
+            title.style.innerText = "GAME OVER";
             container.style.animation = "fadeout 2s";
             container.style.display = "none";
             splashScreen.style.display = "block";
@@ -86,6 +88,7 @@ const game = {
         } else {
             setTimeout(()=>{
             this.run = false;
+            title.style.innerText = "HOOORAYYYY!";
             container.style.animation = "fadeout 3.5s";
             container.style.display = "none";
             splashScreen.style.display = "block";
@@ -133,12 +136,12 @@ const game = {
             warriorHpBar.style.display = "none";
         } 
         if (archer.alive===false){
-            archer.style.display = "none";
+            archerTag.style.display = "none";
             archerAttkBar.style.display = "none";
             archerHpBar.style.display = "none";
         } 
         if (mage.alive===false){
-            mage.style.display = "none";
+            mageTag.style.display = "none";
             mageAttkBar.style.display = "none";
             mageHpBar.style.display = "none";
         }
