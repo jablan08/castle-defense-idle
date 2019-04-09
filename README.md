@@ -26,8 +26,3 @@ There are two abilites that each have a cooldown on use. A group attack the mass
 * CSS
 * CSS @Keyframes
 
-A description of your game. Background info of the game is a nice touch.
-A screenshot or screenshots of your actual game makes your readme more colorful :)
-Technologies Used: List of the technologies used.
-Getting Started: In this section include the link to your deployed game and any instructions you deem important.
-Next Steps: Unsolved problems and/or planned features.
