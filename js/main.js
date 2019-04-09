@@ -311,8 +311,6 @@ warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,.75,10);
 archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer",4,1.50,5.5)
 mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,.50,15)
 
-
-
 // Interval update
 const animate2 = setInterval(function(){
     cxt.clearRect(0,0, innerWidth,innerHeight);
@@ -332,43 +330,5 @@ const animate2 = setInterval(function(){
     }; 
 }, 100)
 
-
-// player class 
-// includes HP, defense, attack, maybe magic power, and special?
-// defend? 
-// name, role(mage, archer, knight)
-
-// extend player class for each role? 
-// bow, sword, lance, staff
-
-//enemy class
-// multiple enemys with bosses
-// HP and attack. Boss has special
-// HP depends on round(can adjust in game rounds)
-
-// game object
-// rounds/waves
-// score
-// game init function
-// create enemy function here?
-
-// game init function
-// game start ==> pick your role
-// battle fucntion
-// place setting
-// place players(selected)
-// bring in random enemys
-
-// battle function
-//
-// how many enemys are left
-// 
-// enemy attack auto on turn 
-
-
-// gameloop
-// check player hp
-// check enemy hp
-// 
 
 
