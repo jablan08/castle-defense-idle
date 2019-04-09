@@ -91,7 +91,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
             game.healReady = true;
             healBar.style.animation = "readyFlash .5s infinite";
         } else {
-            this.heal +=.20;
+            this.heal +=.15;
             healBar.style.width = this.heal + '%' 
         }
     }
@@ -113,7 +113,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
         game.healReady = false;
         this.heal = 1;
         healBar.style.width = this.heal + '%';
-        this.alive = true;
+
     }
 
     this.attackFrame = function() {
