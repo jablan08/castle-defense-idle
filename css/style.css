@@ -1,4 +1,4 @@
-canvas {
+#screen {
     /* background: grey; */
     padding-left: 0;
     padding-right: 0;
@@ -18,13 +18,16 @@ button {
     outline: none;
 }
 .wave {
+    font-family: 'Major Mono Display', monospace;
     text-align: center;
     color: #FFFFFF;
 }
-
+h4 {
+    font-family: 'Unica One', cursive;
+    
+}
 body {
     background-color: black;
-    animation: healFlash 2s;
 }
 input {
     border: none;
@@ -34,7 +37,7 @@ input {
 .characterHP, .enemyHP {
     width: 150px;
     background-color:#4c6af0;
-    border: 2px solid white;
+    border: .5px solid white;
     color: #FFFFFF;
     height: 100%;
     
@@ -67,7 +70,8 @@ input {
 .currentTarget {
     color: #FFFFFF;
     position: relative;
-    right: 40%;
+    right: 18%;
+    font-family: 'Major Mono Display', monospace;
 }
 
 .lizAttkBar, .lizHpBar, .dragAttkBar, .dragHpBar, .dragon, .lizard {
@@ -100,6 +104,7 @@ input {
 }
 .title {
     padding: 25px;
+    
 }
 .splash-content {
     margin: 20px;
@@ -107,11 +112,13 @@ input {
 .title, .splash-content {
     text-align: center;
     color: #FFFFFF;
+    font-family: 'Bungee Inline', cursive;
 }
 #startButton {
     margin: 50px;
     position: relative;
     font-size: 45px;
+    font-family: 'Black Ops One', cursive;
 }
 #startButton:hover {
     background-color: #f50a0a;
@@ -125,3 +132,19 @@ input {
     margin: 2px;
     
   }
+
+  .winner, .loser {
+    display: none;
+    margin: 20px;
+    text-align: center;
+    color: #FFFFFF;
+    font-family: 'Bungee Inline', cursive;
+
+  }
+  #playAgainButton {
+    display: none;
+    margin: 50px;
+    position: relative;
+    font-size: 45px;
+    font-family: 'Black Ops One', cursive;
+}

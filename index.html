@@ -5,18 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Castle Defense Idle</title>
+    <link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Bungee+Inline|Major+Mono+Display|Unica+One" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div id="splashScreen">
         <h1 class="title">Castle Defense Idle</h1>
-        <p class="splash-content">Your castle is under attack! Defend it against the monsters!</p>
+        <p class="splash-content">
+            Your castle is under attack! Defend it against the monsters!
+            Sire, this game is best played in fullscreen!
+        </p>
+        <p class="winner">Well done Sire! You have defended your castle!</p>
+        <p class="loser"></p>
+        <button id="playAgainButton" type="button">DEFEND AGAIN?</button>
         <button id="startButton" type="button">DEFEND</button>
     </div>
     <div class="container">
     <h1 class="wave">Enemies remaining: 5</h1>
     <canvas id="screen" width="800"  height="500" ></canvas>
-    
             
     <div class="menus">
         <div class="enemyMenu">

@@ -59,7 +59,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     this.checkDead = function(){
         if (this.hp <= 0){
             this.alive = false;   
-        } 
+        }
     }
     this.playerBars = function() {
         if (this.attkSpeed >= 100) {
@@ -116,6 +116,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
         warriorHpBar.style.width = `${warrior.hp += 30}%`
         archerHpBar.style.width = `${archer.hp += 30}%`
         mageHpBar.style.width = `${mage.hp += 30}%`
+        this.alive = true;
     }
 
     this.attackFrame = function() {
@@ -185,7 +186,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
     this.strength = strength;
     this.attackPos = attackPos;
     this.alive = true;
-    this.hp = 100;
+    this.hp = 10;
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
     }

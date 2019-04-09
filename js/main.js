@@ -2,16 +2,23 @@
 
 
 const canvas = document.querySelector("canvas");
-const currentTarget = document.querySelector(".currentTarget");
 const cxt = canvas.getContext("2d");
+
 const wave = document.querySelector(".wave");
-const container = document.querySelector(".container");
+const currentTarget = document.querySelector(".currentTarget");
+
 const startButton = document.getElementById("startButton");
-const splashScreen = document.getElementById("splashScreen")
 const attackButton = document.querySelector(".attack");
 const itemButton = document.querySelector(".items");
 const healBar = document.querySelector(".healBar")
-const specialBar = document.querySelector(".specialBar")
+const specialBar = document.querySelector(".specialBar");
+
+const winner = document.querySelector(".winner");
+const loser = document.querySelector(".loser")
+const body = document.querySelector("body");
+const container = document.querySelector(".container");
+const screen = document.getElementById("screen");
+const splashScreen = document.getElementById("splashScreen")
 
 const warriorHpBar = document.querySelector(".warHpBar");
 const warAttkBar = document.querySelector(".warAttkBar");
@@ -58,19 +65,47 @@ const game = {
     run: false,
     specialReady: false,
     healReady: false,
+    gameOver(){
+        if (this.mobs === 0) {
+            this.run = false;
+            canvas.style.animation = "fadeout 2s";
+            winner.style.display = "block";
+        }
+    },
     update(){
-        // this.deadEnemy();
-        // this.wave();
+        if (this.mobs === 2 && this.finalBoss === false) {
+            this.newWave();
+        }
     },
     newWave() {
-            this.finalBoss = true;
-            dragonTag.style.display = "block";
-            dragAttkBar.style.display = "block";
-            dragHpBar.style.display = "block";
+        this.run = false;
+        this.finalBoss = true;
+        screen.style.animation = "fadeout 3s";
+        setTimeout(()=>{
+        screen.style.backgroundImage = "url(css/background/castle.png)";
+        screen.style.animation = "fadein 3s";
+        this.run = true;
+        },1000)
+        dragonTag.style.display = "block";
+        dragAttkBar.style.display = "block";
+        dragHpBar.style.display = "block";
 
-            lizTag.style.display = "block";
-            lizAttkBar.style.display = "block";
-            lizHpBar.style.display = "block";
+        lizTag.style.display = "block";
+        lizAttkBar.style.display = "block";
+        lizHpBar.style.display = "block";
+
+    },
+    deadPlayer() {
+        if (warrior.alive===false){
+            warAttkBar.style.display = "none";
+            warriorHpBar.style.display = "none";
+        } else if (archer.alive===false){
+            archerAttkBar.style.display = "none";
+            archerHpBar.style.display = "none";
+        } else if (mage.alive===false){
+            mageAttkBar.style.display = "none";
+            mageHpBar.style.display = "none";
+        }
     },
     deadEnemy(){
         if (dino.alive===false)
@@ -129,10 +164,12 @@ const game = {
             }
 
         }
-        if (dino.alive === false && slime.alive===false && snake.alive === false) {
-            this.newWave();
+        if (dino.alive === false && slime.alive===false && snake.alive === false && lizard.alive===true) {
             currentTarget.innerText = "Current Target: Lizard";
             game.target = "Lizard";
+        } else if (lizard.alive === false) {
+            currentTarget.innerText = "Current Target: Dragon";
+            game.target = "Dragon";
         }
     }
 }
@@ -141,7 +178,6 @@ const game = {
 //  Event listeners 
 
 addEventListener("click", function(event){
-    console.log(event.x,event.y)
     if (event.x > 398 && event.x < 524 && event.y < 452 && event.y > 403 && dino.alive===true) {
         currentTarget.innerText = "Current Target: Dino";
         game.target = "Dino";
@@ -197,29 +233,33 @@ attackButton.addEventListener("click", ()=>{
 itemButton.addEventListener("click", ()=>{
     if (game.healReady===true) {
         mage.healthGain();
+        body.style.animation = "healFlash 2s";
+        setTimeout(()=>{
+            body.style.animation = "";
+        }, 2000)
     }
 })
 // Sprites 
 let enemies = [
     [
-        lizard = new Enemy(1240,453,5,3,canvas.width*.25,210,"lizard",1,1.20,20)
+        lizard = new Enemy(1240,453,5,3,canvas.width*.25,210,"lizard",1,1.20,15)
     ],
     [
-        dragon = new Enemy(1290,1045,5,5,canvas.width*.06,225,"dragon",1,1,25)
+        dragon = new Enemy(1290,1045,5,5,canvas.width*.06,225,"dragon",1,1,21.5)
     ],
     [
-        slime = new Enemy(705,535,5,5,canvas.width*.25,245,"slime",3,1,10)
+        slime = new Enemy(705,535,5,5,canvas.width*.25,245,"slime",3,1,9)
     ],
     [
         snake = new Enemy(735,376,5,4,canvas.width*.25,370,"snake",1,1.25,8)
     ],
     [
-        dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino",2,.75,15)
+        dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino",2,.75,10)
     ],
 ]
-warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,.75,5);
-archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer",4,1.50,3)
-mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,.50,10)
+warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,.75,10);
+archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer",4,1.50,5.5)
+mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,.50,15)
 
 
 
