@@ -36,7 +36,7 @@ input {
     
   }
 
-  .slimeHpBar, .dinoHpBar, .snakeHpBar, .mageHpBar, .archerHpBar,.warHpBar, .lizHpBar, .dragHpBar  {
+.slimeHpBar, .dinoHpBar, .snakeHpBar, .mageHpBar, .archerHpBar,.warHpBar, .lizHpBar, .dragHpBar  {
     width: 100%;
     height: 15px;
     border: 2px solid white;
@@ -67,3 +67,43 @@ input {
 .lizAttkBar, .lizHpBar, .dragAttkBar, .dragHpBar, .dragon, .lizard {
     display: none;
 }
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 3; }
+}
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+#splashScreen {
+
+    height: 100vh;
+    text-align: center;
+    /* position: absolute; */
+    animation: fadein 5s;
+
+}
+
+.container {
+    display: none;
+    animation: fadein 5s;
+}
+.title {
+    padding: 25px;
+}
+.splash-content {
+    margin: 20px;
+}
+.title, .splash-content {
+    text-align: center;
+    color: #FFFFFF;
+}
+#startButton {
+    margin: 50px;
+    position: relative;
+    font-size: 45px;
+}
+#startButton:hover {
+    background-color: #f50a0a;
+    color: white;
+  }

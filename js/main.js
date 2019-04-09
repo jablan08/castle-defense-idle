@@ -4,118 +4,40 @@
 const canvas = document.querySelector("canvas");
 const currentTarget = document.querySelector(".currentTarget");
 const cxt = canvas.getContext("2d");
-const mouse = {
-    x: innerWidth / 2,
-    y: innerHeight / 2
-}
+const wave = document.querySelector(".wave");
+const container = document.querySelector(".container");
+const startButton = document.getElementById("startButton");
+const splashScreen = document.getElementById("splashScreen")
 const attackButton = document.querySelector(".attack");
-attackButton.addEventListener("click", ()=>{
-    console.log("workerd")
-})
-const warriorHpBar = document.querySelector(".warHpBar")
-const warAttkBar = document.querySelector(".warAttkBar")
 
-const archerAttkBar = document.querySelector(".archerAttkBar")
-const archerHpBar = document.querySelector(".archerHpBar")
+const warriorHpBar = document.querySelector(".warHpBar");
+const warAttkBar = document.querySelector(".warAttkBar");
 
-const mageHpBar = document.querySelector(".mageHpBar")
-const mageAttkBar = document.querySelector(".mageAttkBar")
+const archerAttkBar = document.querySelector(".archerAttkBar");
+const archerHpBar = document.querySelector(".archerHpBar");
+
+const mageHpBar = document.querySelector(".mageHpBar");
+const mageAttkBar = document.querySelector(".mageAttkBar");
 
 
-const dinoTag = document.querySelector(".dino")
-const dinoHpBar = document.querySelector(".dinoHpBar")
-const dinoAttkBar = document.querySelector(".dinoAttkBar")
+const dinoTag = document.querySelector(".dino");
+const dinoHpBar = document.querySelector(".dinoHpBar");
+const dinoAttkBar = document.querySelector(".dinoAttkBar");
 
-const snakeTag = document.querySelector(".snake")
-const snakeAttkBar = document.querySelector(".snakeAttkBar")
-const snakeHpBar = document.querySelector(".snakeHpBar")
-const slimeTag = document.querySelector(".slime")
-const slimeHpBar = document.querySelector(".slimeHpBar")
-const slimeAttkBar = document.querySelector(".slimeAttkBar")
+const snakeTag = document.querySelector(".snake");
+const snakeAttkBar = document.querySelector(".snakeAttkBar");
+const snakeHpBar = document.querySelector(".snakeHpBar");
+const slimeTag = document.querySelector(".slime");
+const slimeHpBar = document.querySelector(".slimeHpBar");
+const slimeAttkBar = document.querySelector(".slimeAttkBar");
 
-const lizTag = document.querySelector(".lizard")
-const lizHpBar = document.querySelector(".lizHpBar")
-const lizAttkBar = document.querySelector(".lizAttkBar")
+const lizTag = document.querySelector(".lizard");
+const lizHpBar = document.querySelector(".lizHpBar");
+const lizAttkBar = document.querySelector(".lizAttkBar");
 
-const dragonTag = document.querySelector(".dragon")
-const dragHpBar = document.querySelector(".dragHpBar")
-const dragAttkBar = document.querySelector(".dragAttkBar")
-const wave = document.querySelector(".wave")
-
-
-
-
-// let dinoHp = 100;
-// let slimeHp = 100;
-// let snakeHp = 100;
-// var id = setInterval(warFrame, 100);
-// var id = setInterval(archerFrame, 100);
-// var id = setInterval(mageFrame, 100);
-// function warFrame() {
-// if (warrior.attkSpeed >= 100) {
-//     warrior.attackReady = true;
-//     warrior.attack();
-//     // archer.attackReady = true;
-//     // mage.attackReady = true;
-//     // clearInterval(id);
-//     warrior.attkSpeed = 1;
-//     warAttkBar.style.width = warrior.attkSpeed + '%'; 
-//     // archerAttkBar.style.width = width + '%'; 
-//     // mageAttkBar.style.width = width + '%';
-// } else {
-//       warrior.attkSpeed+=.75; 
-//       warAttkBar.style.width = warrior.attkSpeed + '%'; 
-//     //   archerAttkBar.style.width = width + '%'; 
-//     //   mageAttkBar.style.width = width + '%'; 
-// }
-// if (archer.attkSpeed >= 100) {
-//     archer.attackReady = true;
-//     archer.attack();
-//     archer.attkSpeed = 1;
-//     archerAttkBar.style.width = archer.attkSpeed + '%'; 
-// } else {
-//       archer.attkSpeed+=1.5;
-//       archerAttkBar.style.width = archer.attkSpeed + '%';
-// }
-// if (mage.attkSpeed >= 100) {
-//     mage.attack();
-//     mage.attackReady = true;
-//     mage.attkSpeed=1;
-//     mageAttkBar.style.width = mage.attkSpeed + '%';
-//     } else {
-//       mage.attkSpeed+=.50; 
-//       mageAttkBar.style.width = mage.attkSpeed + '%'; 
-//     }
-// }
-// // function archerFrame() {
-// // if (archer.attkSpeed >= 100) {
-// //     archer.attackReady = true;
-// //     archer.attack();
-// //     archer.attkSpeed = 1;
-// //     archerAttkBar.style.width = archer.attkSpeed + '%'; 
-// // } else {
-// //       archer.attkSpeed+=1.5;
-// //       archerAttkBar.style.width = archer.attkSpeed + '%';
-// // }
-// // }
-// function mageFrame() {
-// if (mage.attkSpeed >= 100) {
-//     mage.attack();
-//     // warrior.attackReady = true;
-//     // archer.attackReady = true;
-//     mage.attackReady = true;
-//     // clearInterval(id);
-//     mage.attkSpeed=1;
-//     // warAttkBar.style.width = width + '%'; 
-//     // archerAttkBar.style.width = width + '%'; 
-//     mageAttkBar.style.width = mage.attkSpeed + '%';
-//     } else {
-//       mage.attkSpeed+=.50; 
-//     //   warAttkBar.style.width = width + '%'; 
-//     //   archerAttkBar.style.width = width + '%'; 
-//       mageAttkBar.style.width = mage.attkSpeed + '%'; 
-//     }
-// }
+const dragonTag = document.querySelector(".dragon");
+const dragHpBar = document.querySelector(".dragHpBar");
+const dragAttkBar = document.querySelector(".dragAttkBar");
 
 // Game checker
 
@@ -123,19 +45,16 @@ const game = {
    
     mobs: 5,
     wave() {
-        // if (dino.alive === false || slime.alive === false || snake.alive === false || lizard.alive === false|| dragon.alive === false)
-        // {
             wave.innerText = `Enemies remaining: ${this.mobs}`
-        // }
     },
     score: 0,
     target:"",
     CPUtarget: ["warrior", "archer", "mage"],
     finalBoss: false,
-
+    run: false,
     update(){
         this.deadEnemy();
-        this.wave();
+        // this.wave();
     },
     newWave() {
             this.finalBoss = true;
@@ -203,87 +122,57 @@ addEventListener("click", function(event){
     if (event.x > 382 && event.x < 565 && event.y < 458 && event.y > 327 && game.finalBoss ===true) {
         currentTarget.innerText = "Current Target: Dragon";
         game.target = "Dragon";
-        console.log("You clicked the dragon")
+        // console.log("You clicked the dragon")
     } else if (event.x > 549 && event.x < 692 && event.y < 388 && event.y > 293 && game.finalBoss ===true) {
         currentTarget.innerText = "Current Target: Lizard";
         game.target = "Lizard";
-        console.log("You clicked the lizard.")
+        // console.log("You clicked the lizard.")
     }
-        // mouse.x = event.clientX;
-    // mouse.y = event.clientY;
-    console.log(event.x,event.y)
+    // console.log(event.x,event.y)
+})
+// Splash Screen and Start Button
+startButton.addEventListener("click", ()=>{
+    game.run = true;
+    splashScreen.style.animation = "fadeout 5s";
+    setTimeout(()=>{
+        splashScreen.style.display = "none";
+        container.style.display = "block";
+    },1000)
+   
 })
 
-// window.addEventListener("click", (e)=>{
-//     console.log(e.target);
-// })
+attackButton.addEventListener("click", ()=>{
+    console.log("workerd")
+})
 
-// addEventListener('resize', () => {
+// Sprites 
+let enemies = [
+    [
+        lizard = new Enemy(1240,453,5,3,canvas.width*.25,210,"lizard",1,.75,10)
+    ],
+    [
+        dragon = new Enemy(1290,1045,5,5,canvas.width*.06,225,"dragon",1,.50,20)
+    ],
+    [
+        slime = new Enemy(705,535,5,5,canvas.width*.25,245,"slime",3,1,4)
+    ],
+    [
+        snake = new Enemy(735,376,5,4,canvas.width*.25,370,"snake",1,1.25,5)
+    ],
+    [
+        dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino",2,.75,3)
+    ],
+]
+warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,.75,5);
+archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer",4,1.50,3)
+mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,.50,10)
 
-//     init()
-// })
-// keyboard functions
-function Keyboarder() {
-    let keyState = {};
-    window.onkeydown = function(e) { 
-        keyState[e.keyCode] = true;
-    };
-    window.onkeyup = function(e) { 
-        keyState[e.keyCode] = false;
-    };
-    this.isDown = function(keyCode) {
-        return keyState[keyCode] === true;
-    };
-    this.KEYS = { 
-        LEFT: 37,
-        RIGHT: 39,
-        SPACE: 32,
-        UP: 38, 
-        DOWN: 40
-    };
-};
-
-
-
-// creating characters on the board
-// let ran = Math.floor(Math.random()*6);
-// function init() {
-    let enemies = [
-    
-        [
-            lizard = new Enemy(1240,453,5,3,canvas.width*.25,210,"lizard",1,.75,10)
-        ],
-        [
-            dragon = new Enemy(1290,1045,5,5,canvas.width*.06,225,"dragon",1,.50,20)
-        ],
-        [
-           slime = new Enemy(705,535,5,5,canvas.width*.25,245,"slime",3,1,4)
-        ],
-        [
-            snake = new Enemy(735,376,5,4,canvas.width*.25,370,"snake",1,1.25,5)
-        ],
-        [
-            dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino",2,.75,3)
-        ],
-    ]
-    warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,.75,5);
-    archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer",4,1.50,3)
-    mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,.50,10)
-    // enemy = new Enemy(enemies[ran][0],enemies[ran][1],enemies[ran][2],enemies[ran][3],enemies[0][4],enemies[0][5],
-    //     enemies[ran][6],enemies[ran][7]);
-    // enemy2 = new Enemy(enemies[ran][0],enemies[ran][1],enemies[ran][2],enemies[ran][3],enemies[ran][4],enemies[ran][5],
-    //     enemies[ran][6],enemies[ran][7]);
-    
-    // for (let i = 0; i < 3; i++) 3
-    //     enemies.push(new Enemy());
-    // }
-// }
-// init();
 
 
 // Interval update
 const animate2 = setInterval(function(){
     cxt.clearRect(0,0, innerWidth,innerHeight);
+    if (game.run === true){
     warrior.update();
     mage.update();
     archer.update();
@@ -295,11 +184,9 @@ const animate2 = setInterval(function(){
     snake.update();
     dino.update();}
     game.update();
-    hit = false;
+    }
 }, 100)
-//  
 
-// animate();
 
 // player class 
 // includes HP, defense, attack, maybe magic power, and special?
@@ -328,9 +215,9 @@ const animate2 = setInterval(function(){
 // bring in random enemys
 
 // battle function
-// whose turn is it?
+//
 // how many enemys are left
-// attack, defend features?
+// 
 // enemy attack auto on turn 
 
 

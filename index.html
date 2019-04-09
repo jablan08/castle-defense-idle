@@ -8,9 +8,16 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1 class="wave">Enemies remaining: 5 </h1>
+    <div id="splashScreen">
+        <h1 class="title">Castle Defense Idle</h1>
+        <p class="splash-content">Your castle is under attack! Defend it against the monsters!</p>
+        <button id="startButton" type="button">DEFEND</button>
+    </div>
+    <div class="container">
+    <h1 class="wave">Enemies remaining: 5</h1>
     <canvas id="screen" width="800"  height="500" ></canvas>
-   
+    
+            
     <div class="menus">
         <div class="enemyMenu">
             <div class="enemyHP">
@@ -58,6 +65,7 @@
                 <div class="mageAttkBar"></div>
             </div>
         </div>
+    </div>
     </div>
     <script src="js/players.js"></script>
     <script src="js/main.js"></script>
