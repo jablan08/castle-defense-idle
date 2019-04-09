@@ -1,1 +1,1 @@
-# hack_slash_game
+# castle-defense-idle
