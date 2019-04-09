@@ -29,7 +29,8 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     this.attkSpeed = 1;
     this.attkRate = attkRate;
     this.strength = strength;
-    this.hp = 100;
+    this.alive = true;
+    this.hp = 10;
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
     }
@@ -42,13 +43,20 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     }
 // Full player update
     this.update = function() {
+        if (this.alive === true){
         this.playerImage();
         this.playerMotion();
         this.draw();
         this.playerBars();
         this.attackFrame();
-        
+        this.checkDead();
+        }
 
+    }
+    this.checkDead = function(){
+        if (this.hp <= 0){
+            this.alive = false;   
+        } 
     }
     this.playerBars = function() {
         if (this.attkSpeed >= 100) {

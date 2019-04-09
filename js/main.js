@@ -48,7 +48,7 @@ const game = {
             wave.innerText = `Enemies remaining: ${this.mobs}`
     },
     score: 0,
-    target:"",
+    target: "Dino",
     CPUtarget: ["warrior", "archer", "mage"],
     finalBoss: false,
     run: false,
@@ -96,7 +96,6 @@ const game = {
         if (dino.alive === false && slime.alive===false && snake.alive === false) {
             this.newWave();
         }
-        
     }
 }
 
@@ -133,7 +132,7 @@ addEventListener("click", function(event){
 // Splash Screen and Start Button
 startButton.addEventListener("click", ()=>{
     game.run = true;
-    splashScreen.style.animation = "fadeout 5s";
+    splashScreen.style.animation = "fadeout 3s";
     setTimeout(()=>{
         splashScreen.style.display = "none";
         container.style.display = "block";

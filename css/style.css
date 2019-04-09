@@ -14,6 +14,9 @@ canvas {
     margin:0;
     box-sizing: border-box
 }
+button {
+    outline: none;
+}
 .wave {
     text-align: center;
     color: #FFFFFF;
