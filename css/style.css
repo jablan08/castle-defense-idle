@@ -109,10 +109,11 @@ input {
 .splash-content {
     margin: 20px;
 }
-.title, .splash-content {
+.title, .splash-content, .sireMsg {
     text-align: center;
     color: #FFFFFF;
     font-family: 'Bungee Inline', cursive;
+
 }
 #startButton {
     margin: 50px;
@@ -120,20 +121,20 @@ input {
     font-size: 45px;
     font-family: 'Black Ops One', cursive;
 }
-#startButton:hover {
+#startButton:hover, #playAgainButton:hover {
     background-color: #f50a0a;
     color: white;
   }
 
-  .specialBar, .healBar {
+.specialBar, .healBar {
     width: 1%;
     height: 5px;
     background-color: rgb(252, 236, 17);
     margin: 2px;
     
-  }
+}
 
-  .winner, .loser {
+.winner, .loser {
     display: none;
     margin: 20px;
     text-align: center;
@@ -141,7 +142,7 @@ input {
     font-family: 'Bungee Inline', cursive;
 
   }
-  #playAgainButton {
+#playAgainButton {
     display: none;
     margin: 50px;
     position: relative;

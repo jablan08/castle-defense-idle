@@ -8,11 +8,14 @@ const wave = document.querySelector(".wave");
 const currentTarget = document.querySelector(".currentTarget");
 
 const startButton = document.getElementById("startButton");
+const playAgainButton = document.getElementById("playAgainButton");
 const attackButton = document.querySelector(".attack");
 const itemButton = document.querySelector(".items");
 const healBar = document.querySelector(".healBar")
 const specialBar = document.querySelector(".specialBar");
 
+const sireMsg = document.querySelector(".sireMsg");
+const splashContent = document.querySelector(".splash-content")
 const winner = document.querySelector(".winner");
 const loser = document.querySelector(".loser")
 const body = document.querySelector("body");
@@ -65,27 +68,49 @@ const game = {
     run: false,
     specialReady: false,
     healReady: false,
+    playersDead: false,
     gameOver(){
-        if (this.mobs === 0) {
+        if (this.playersDead === true){
+            setTimeout(()=>{
             this.run = false;
-            canvas.style.animation = "fadeout 2s";
+            container.style.animation = "fadeout 2s";
+            container.style.display = "none";
+            splashScreen.style.display = "block";
+            loser.style.display = "block";
+            }, 1000)
+        } else {
+            setTimeout(()=>{
+            this.run = false;
+            container.style.animation = "fadeout 3.5s";
+            container.style.display = "none";
+            splashScreen.style.display = "block";
+            splashScreen.style.animation = "fadein 3s";
+            playAgainButton.style.display = "inline";
             winner.style.display = "block";
-        }
+        }, 1000)
+    }
+        
     },
     update(){
         if (this.mobs === 2 && this.finalBoss === false) {
-            this.newWave();
+            setTimeout(()=>{
+                this.newWave();
+            },500)   
+        } else if (this.mobs === 0 || this.playersDead === true){
+            this.gameOver();
         }
     },
     newWave() {
         this.run = false;
         this.finalBoss = true;
-        screen.style.animation = "fadeout 3s";
+        container.style.animation = "fadeout 3s";
         setTimeout(()=>{
         screen.style.backgroundImage = "url(css/background/castle.png)";
-        screen.style.animation = "fadein 3s";
+        container.style.animation = "fadein 3s";
         this.run = true;
-        },1000)
+        currentTarget.innerText = "Current Target: Lizard";
+        game.target = "Lizard";
+        },1500)
         dragonTag.style.display = "block";
         dragAttkBar.style.display = "block";
         dragHpBar.style.display = "block";
@@ -108,8 +133,7 @@ const game = {
         }
     },
     deadEnemy(){
-        if (dino.alive===false)
-        {
+        if (dino.alive===false){
             dinoTag.style.display = "none";
             dinoAttkBar.style.display = "none";
             dinoHpBar.style.display = "none";
@@ -162,15 +186,12 @@ const game = {
                 currentTarget.innerText = "Current Target: Lizard";
                 game.target = "Lizard";
             }
-
         }
-        if (dino.alive === false && slime.alive===false && snake.alive === false && lizard.alive===true) {
-            currentTarget.innerText = "Current Target: Lizard";
-            game.target = "Lizard";
-        } else if (lizard.alive === false) {
-            currentTarget.innerText = "Current Target: Dragon";
-            game.target = "Dragon";
-        }
+        // if (dino.alive === false && slime.alive===false && snake.alive === false && lizard.alive===true) {
+        // } else if (lizard.alive === false) {
+        //     currentTarget.innerText = "Current Target: Dragon";
+        //     game.target = "Dragon";
+        // }
     }
 }
 
@@ -178,13 +199,13 @@ const game = {
 //  Event listeners 
 
 addEventListener("click", function(event){
-    if (event.x > 398 && event.x < 524 && event.y < 452 && event.y > 403 && dino.alive===true) {
+    if (event.x > 398 && event.x < 524 && event.y < 452 && event.y > 403 && dino.alive===true || event.target.classList[0] === "dino") {
         currentTarget.innerText = "Current Target: Dino";
         game.target = "Dino";
-    } else if (event.x > 520 && event.x < 601 && event.y < 385 && event.y > 335 && slime.alive===true) {
+    } else if (event.x > 520 && event.x < 601 && event.y < 385 && event.y > 335 && slime.alive===true || event.target.classList[0] === "slime") {
         currentTarget.innerText = "Current Target: Slime";
         game.target = "Slime";
-    } else if (event.x > 519 && event.x < 608 && event.y < 493 && event.y > 445 && snake.alive===true) {
+    } else if (event.x > 519 && event.x < 608 && event.y < 493 && event.y > 445 && snake.alive===true || event.target.classList[0] === "snake") {
         currentTarget.innerText = "Current Target: Snake";
         game.target = "Snake";
     }
@@ -192,28 +213,31 @@ addEventListener("click", function(event){
 // Dragon and Lizard event listeners.
 
 addEventListener("click", function(event){
-    if (event.x > 382 && event.x < 565 && event.y < 458 && event.y > 327 && game.finalBoss ===true) {
+    if (event.x > 382 && event.x < 565 && event.y < 458 && event.y > 327 && game.finalBoss ===true || event.target.classList[0] === "dragon") {
         currentTarget.innerText = "Current Target: Dragon";
         game.target = "Dragon";
-        // console.log("You clicked the dragon")
-    } else if (event.x > 549 && event.x < 692 && event.y < 388 && event.y > 293 && game.finalBoss ===true) {
+    } else if (event.x > 549 && event.x < 692 && event.y < 388 && event.y > 293 && game.finalBoss ===true || event.target.classList[0] === "lizard") {
         currentTarget.innerText = "Current Target: Lizard";
         game.target = "Lizard";
-        // console.log("You clicked the lizard.")
     }
-    // console.log(event.x,event.y)
 })
 // Splash Screen and Start Button
 startButton.addEventListener("click", ()=>{
     game.run = true;
     splashScreen.style.animation = "fadeout 3s";
     setTimeout(()=>{
+        startButton.style.display = "none";
+        splashContent.style.display = "none";
         splashScreen.style.display = "none";
+        sireMsg.style.display = "none";
+        splashScreen.style.animation = "";
         container.style.display = "block";
     },1000)
    
 })
-
+playAgainButton.addEventListener("click", ()=>{
+    window.location.reload();
+})
 attackButton.addEventListener("click", ()=>{
     if (game.specialReady===true) {
         warrior.allAttack();
@@ -270,15 +294,16 @@ const animate2 = setInterval(function(){
     warrior.update();
     mage.update();
     archer.update();
-    if (game.finalBoss ===true){
-        lizard.update();
-        dragon.update();
-    } else {
-    slime.update();
-    snake.update();
-    dino.update();}
     game.update();
-    }
+        if (game.finalBoss ===true){
+            lizard.update();
+            dragon.update();
+        } else {
+            slime.update();
+            snake.update();
+            dino.update();
+        }     
+    } 
 }, 100)
 
 

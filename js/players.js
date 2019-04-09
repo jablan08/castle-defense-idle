@@ -60,6 +60,9 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
         if (this.hp <= 0){
             this.alive = false;   
         }
+        if (warrior.alive === false && mage.alive === false && archer.alive === false){
+            game.playersDead = true;
+        }
     }
     this.playerBars = function() {
         if (this.attkSpeed >= 100) {
@@ -186,7 +189,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
     this.strength = strength;
     this.attackPos = attackPos;
     this.alive = true;
-    this.hp = 10;
+    this.hp = 1;
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
     }
