@@ -9,6 +9,9 @@ const container = document.querySelector(".container");
 const startButton = document.getElementById("startButton");
 const splashScreen = document.getElementById("splashScreen")
 const attackButton = document.querySelector(".attack");
+const itemButton = document.querySelector(".items");
+const healBar = document.querySelector(".healBar")
+const specialBar = document.querySelector(".specialBar")
 
 const warriorHpBar = document.querySelector(".warHpBar");
 const warAttkBar = document.querySelector(".warAttkBar");
@@ -27,6 +30,7 @@ const dinoAttkBar = document.querySelector(".dinoAttkBar");
 const snakeTag = document.querySelector(".snake");
 const snakeAttkBar = document.querySelector(".snakeAttkBar");
 const snakeHpBar = document.querySelector(".snakeHpBar");
+
 const slimeTag = document.querySelector(".slime");
 const slimeHpBar = document.querySelector(".slimeHpBar");
 const slimeAttkBar = document.querySelector(".slimeAttkBar");
@@ -52,8 +56,10 @@ const game = {
     CPUtarget: ["warrior", "archer", "mage"],
     finalBoss: false,
     run: false,
+    specialReady: false,
+    healReady: false,
     update(){
-        this.deadEnemy();
+        // this.deadEnemy();
         // this.wave();
     },
     newWave() {
@@ -72,29 +78,61 @@ const game = {
             dinoTag.style.display = "none";
             dinoAttkBar.style.display = "none";
             dinoHpBar.style.display = "none";
+            if (snake.alive===true) {
+                currentTarget.innerText = "Current Target: Snake";
+                game.target = "Snake";
+            } else {
+                currentTarget.innerText = "Current Target: Slime";
+                game.target = "Slime"
+            }
         } 
         if (slime.alive===false){
             slimeTag.style.display = "none";
             slimeAttkBar.style.display = "none";
             slimeHpBar.style.display = "none";
+            if (snake.alive===true) {
+                currentTarget.innerText = "Current Target: Snake";
+                game.target = "Snake";
+            } else {
+                currentTarget.innerText = "Current Target: Dino";
+                game.target = "Dino"
+            }
         } 
         if (snake.alive===false){
             snakeTag.style.display = "none";
             snakeAttkBar.style.display = "none";
             snakeHpBar.style.display = "none";
+            if (dino.alive===true) {
+                currentTarget.innerText = "Current Target: Dino";
+                game.target = "Dino";
+            } else {
+                currentTarget.innerText = "Current Target: Slime";
+                game.target = "Slime"
+            }
         }
         if (lizard.alive===false){
             lizTag.style.display = "none";
             lizAttkBar.style.display = "none";
             lizHpBar.style.display = "none";
+            if (dragon.alive === true) {
+                currentTarget.innerText = "Current Target: Dragon";
+                game.target = "Dragon";
+            }
         }
         if (dragon.alive===false){
             dragonTag.style.display = "none";
             dragAttkBar.style.display = "none";
             dragHpBar.style.display = "none";
+            if (lizard.alive===true) {
+                currentTarget.innerText = "Current Target: Lizard";
+                game.target = "Lizard";
+            }
+
         }
         if (dino.alive === false && slime.alive===false && snake.alive === false) {
             this.newWave();
+            currentTarget.innerText = "Current Target: Lizard";
+            game.target = "Lizard";
         }
     }
 }
@@ -141,25 +179,42 @@ startButton.addEventListener("click", ()=>{
 })
 
 attackButton.addEventListener("click", ()=>{
-    console.log("workerd")
+    if (game.specialReady===true) {
+        warrior.allAttack();
+        archer.allAttack();
+        mage.allAttack();
+        if (game.finalBoss === false) {
+            dinoHpBar.style.width = `${dino.hp -= 20}%`;
+            slimeHpBar.style.width = `${slime.hp -= 20}%`;
+            snakeHpBar.style.width = `${snake.hp -= 20}%`;
+        } else if (game.finalBoss === true) {
+            lizHpBar.style.width = `${lizard.hp -= 20}%`
+            dragHpBar.style.width = `${dragon.hp -= 20}%`
+        }
+    }
 })
 
+itemButton.addEventListener("click", ()=>{
+    if (game.healReady===true) {
+        mage.healthGain();
+    }
+})
 // Sprites 
 let enemies = [
     [
-        lizard = new Enemy(1240,453,5,3,canvas.width*.25,210,"lizard",1,.75,10)
+        lizard = new Enemy(1240,453,5,3,canvas.width*.25,210,"lizard",1,1.20,20)
     ],
     [
-        dragon = new Enemy(1290,1045,5,5,canvas.width*.06,225,"dragon",1,.50,20)
+        dragon = new Enemy(1290,1045,5,5,canvas.width*.06,225,"dragon",1,1,25)
     ],
     [
-        slime = new Enemy(705,535,5,5,canvas.width*.25,245,"slime",3,1,4)
+        slime = new Enemy(705,535,5,5,canvas.width*.25,245,"slime",3,1,10)
     ],
     [
-        snake = new Enemy(735,376,5,4,canvas.width*.25,370,"snake",1,1.25,5)
+        snake = new Enemy(735,376,5,4,canvas.width*.25,370,"snake",1,1.25,8)
     ],
     [
-        dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino",2,.75,3)
+        dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino",2,.75,15)
     ],
 ]
 warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,.75,5);

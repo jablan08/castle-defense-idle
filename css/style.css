@@ -24,6 +24,7 @@ button {
 
 body {
     background-color: black;
+    animation: healFlash 2s;
 }
 input {
     border: none;
@@ -58,13 +59,15 @@ input {
     display: flex;
   }
 
-.mageAttkBar, .archerAttkBar, .warAttkBar, .dinoAttkBar, .slimeAttkBar, .snakeAttkBar, .lizAttkBar, .dragAttkBar {
+.mageAttkBar, .archerAttkBar, .warAttkBar, .dinoAttkBar, .slimeAttkBar, .snakeAttkBar, .lizAttkBar, .dragAttkBar{
     width: 1%;
     height: 7.5px;
     background-color: red;
 }
 .currentTarget {
-    color: #FFFFFF
+    color: #FFFFFF;
+    position: relative;
+    right: 40%;
 }
 
 .lizAttkBar, .lizHpBar, .dragAttkBar, .dragHpBar, .dragon, .lizard {
@@ -77,6 +80,10 @@ input {
 @keyframes fadeout {
     from { opacity: 1; }
     to   { opacity: 0; }
+}
+@keyframes healFlash {
+    from { background-color: green;}
+    to { background-color: black;}
 }
 #splashScreen {
 
@@ -109,4 +116,12 @@ input {
 #startButton:hover {
     background-color: #f50a0a;
     color: white;
+  }
+
+  .specialBar, .healBar {
+    width: 1%;
+    height: 5px;
+    background-color: rgb(252, 236, 17);
+    margin: 2px;
+    
   }

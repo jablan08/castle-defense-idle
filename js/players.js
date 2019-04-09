@@ -29,8 +29,10 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     this.attkSpeed = 1;
     this.attkRate = attkRate;
     this.strength = strength;
+    this.special = 1;
+    this.heal = 1;
     this.alive = true;
-    this.hp = 10;
+    this.hp = 100;
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
     }
@@ -50,6 +52,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
         this.playerBars();
         this.attackFrame();
         this.checkDead();
+        this.specialHealBars();
         }
 
     }
@@ -73,6 +76,48 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
             mageAttkBar.style.width = mage.attkSpeed + '%';
         }
     }
+
+    this.specialHealBars = function (){
+        if (this.special>=100){
+            game.specialReady = true;
+            
+        } else {
+            this.special +=.25
+            specialBar.style.width = this.special + '%' 
+        }
+        if (this.heal >=100){
+            game.healReady = true;
+            
+        } else {
+            this.heal +=.15
+            healBar.style.width = this.heal + '%' 
+        }
+    }
+    this.allAttack = function() {
+        game.specialReady = false;
+        this.special = 1;
+        specialBar.style.width = this.special + '%' 
+        this.attackReady = true;
+        this.currentFrame = ++this.currentFrame % this.cols;
+        this.srcX = this.currentFrame * this.frameWidth;
+        this.srcY = this.attackPos * this.frameHeight;
+            
+        setTimeout(()=> {
+            this.attackReady = false
+            }, 750)
+        
+        
+        
+    }
+    this.healthGain = function() {
+        game.healReady = false;
+        this.heal = 1;
+        healBar.style.width = this.heal + '%' 
+        warriorHpBar.style.width = `${warrior.hp += 30}%`
+        archerHpBar.style.width = `${archer.hp += 30}%`
+        mageHpBar.style.width = `${mage.hp += 30}%`
+    }
+
     this.attackFrame = function() {
         //auto attack
         //
@@ -88,21 +133,17 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
         }
         
     }
+
     this.attack = function(){
         if (game.target=== "Dino") {
-            console.log("hit Dino")
             dinoHpBar.style.width = `${dino.hp -= this.strength}%`;
         } else if (game.target==="Slime") {
-            console.log("hit Slime")
             slimeHpBar.style.width = `${slime.hp -= this.strength}%`;
         } else if (game.target==="Snake") {
-            console.log("hit Snake")
             snakeHpBar.style.width = `${snake.hp -= this.strength}%`;
         } else if (game.target==="Lizard") {
-            console.log("hit Snake")
             lizHpBar.style.width = `${lizard.hp -= this.strength}%`;
         } else if (game.target==="Dragon") {
-            console.log("hit Snake")
             dragHpBar.style.width = `${dragon.hp -= this.strength}%`;
         } 
     }
@@ -144,7 +185,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
     this.strength = strength;
     this.attackPos = attackPos;
     this.alive = true;
-    this.hp = 10;
+    this.hp = 100;
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
     }
@@ -195,6 +236,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
         }
         
     }
+
     this.attack = function() {
         let random = Math.floor(Math.random()*3);
         if (game.CPUtarget[random]==="warrior"){
@@ -210,6 +252,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
             this.alive = false;
             game.mobs -=1 
             game.wave();   
+            game.deadEnemy();
         } 
     }
     this.enemyImage = function() {
