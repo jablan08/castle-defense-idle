@@ -120,6 +120,9 @@ input {
     font-family: 'Bungee Inline', cursive;
 
 }
+.sireMsg {
+    color:#f00909
+}
 #startButton {
     margin: 90px;
     position: relative;
