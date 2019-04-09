@@ -190,7 +190,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
     this.strength = strength;
     this.attackPos = attackPos;
     this.alive = true;
-    this.hp = 1;
+    this.hp = 100;
     this.draw = function() {
         cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
     }

@@ -77,7 +77,7 @@ const game = {
         if (this.playersDead === true){
             setTimeout(()=>{
             this.run = false;
-            title.style.innerText = "GAME OVER";
+            title.innerText = "GAME OVER";
             container.style.animation = "fadeout 2s";
             container.style.display = "none";
             splashScreen.style.display = "block";
@@ -88,12 +88,13 @@ const game = {
         } else {
             setTimeout(()=>{
             this.run = false;
-            title.style.innerText = "HOOORAYYYY!";
+            title.innerText = "HOOORAYYYY!";
             container.style.animation = "fadeout 3.5s";
             container.style.display = "none";
             splashScreen.style.display = "block";
             splashScreen.style.animation = "fadein 3s";
             playAgainButton.style.display = "inline";
+            playAgainButton.innerText = "DEFEND AGAIN?"
             winner.style.display = "block";
         }, 1000)
     }
@@ -201,11 +202,6 @@ const game = {
                 game.target = "Lizard";
             }
         }
-        // if (dino.alive === false && slime.alive===false && snake.alive === false && lizard.alive===true) {
-        // } else if (lizard.alive === false) {
-        //     currentTarget.innerText = "Current Target: Dragon";
-        //     game.target = "Dragon";
-        // }
     }
 }
 
@@ -240,6 +236,7 @@ startButton.addEventListener("click", ()=>{
     game.run = true;
     splashScreen.style.animation = "fadeout 3s";
     setTimeout(()=>{
+        title.innerText = "";
         startButton.style.display = "none";
         splashContent.style.display = "none";
         splashScreen.style.display = "none";
