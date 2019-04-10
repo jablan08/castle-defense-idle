@@ -91,7 +91,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
             game.healReady = true;
             healBar.style.animation = "readyFlash .5s infinite";
         } else {
-            this.heal +=20;
+            this.heal +=.20;
             healBar.style.width = this.heal + '%' 
         }
     }
