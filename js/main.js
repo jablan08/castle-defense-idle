@@ -41,7 +41,6 @@ const mageTag = document.querySelector(".mageTag");
 const mageHpBar = document.querySelector(".mageHpBar");
 const mageAttkBar = document.querySelector(".mageAttkBar");
 
-
 const dinoTag = document.querySelector(".dino");
 const dinoHpBar = document.querySelector(".dinoHpBar");
 const dinoAttkBar = document.querySelector(".dinoAttkBar");
@@ -70,7 +69,7 @@ const enemyHit = new Audio("music/enemyHit2.ogg")
 const game = {
     mobs: 5,
     wave() {
-            wave.innerText = `Enemies remaining: ${this.mobs}`
+        wave.innerText = `Enemies remaining: ${this.mobs}`
     },
     score: 0,
     target: "Dino",
