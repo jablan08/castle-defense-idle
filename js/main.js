@@ -247,6 +247,7 @@ startButton.addEventListener("click", ()=>{
         splashScreen.style.animation = "";
         container.style.display = "block";
         idleImgs.style.display = "none";
+        modal.style.display = "none";
     },1000)
 });
 

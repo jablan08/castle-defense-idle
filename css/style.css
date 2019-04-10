@@ -132,11 +132,11 @@ input {
     position: relative;
     font-size: 40px;
     font-family: 'Black Ops One', cursive;
-    padding: 25px;
-    border-radius: 25%;
+    padding: 20px;
+    border-radius: 30%;
     display: block;
 }
-#startButton:hover, #playAgainButton:hover {
+#startButton:hover, #playAgainButton:hover, #howToPlay:hover {
     background-color: #f50a0a;
     color: white;
   }
@@ -177,7 +177,7 @@ input {
     font-family: 'Black Ops One', cursive;
     font-size: 15px;
     margin: 10px;
-    border-radius: 20%;
+    border-radius: 27%;
     padding: 8px;
 }
 .modal {
@@ -191,7 +191,7 @@ input {
     overflow: auto; 
     background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.4); 
-    text-align: center;
+    text-align: left;
 }
   
   
@@ -218,4 +218,7 @@ input {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+.targetBox {
+    display: grid;
 }
