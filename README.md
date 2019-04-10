@@ -1,5 +1,5 @@
 # Castle Defense Idle
-Defense your castle in this basic idle style RPG! Inspired by classic Role-playing Games(RPGs) and modern idle games, Castle Defense Idle is a simple idle game with auto and click targeting. **This game functions the best played in full-screen!** If you're having trouble targeting you can also click the monster's name.
+Defense your castle in this basic idle style RPG! Inspired by classic Role-playing Games(RPGs) and modern idle games, Castle Defense Idle is a simple idle game with auto and click targeting. **This game functions the best played in full-screen at 100%!** If you're having trouble targeting you can also click the monster's name.
 
 ## Sprites
 Sprites(characters in the game) were created using Canvas, and each sprite image is a sheet of images that is iterated over using the height, width, the number of columns, and the number of rows to get the desire position of the sprite.
@@ -11,7 +11,7 @@ Each sprite has a different strength attack speed. For example, the archer's att
 This game was built for easy addition of sprites in the future by using object orientated functions. Only the specifications of the sprite image sheet is needed, customize the sprite strength and speed, and the sprite is ready to battle!
 ## Targeting and Special Abilities
 ### Targeting
-While this is an idle game with auto targeting, the player is able to select a target for strategy by clicking on the monster image **_if played in full-screen_** or by clicking on the enemy sprite's name.
+While this is an idle game with auto targeting, the player is able to select a target for strategy by clicking on the monster image **_if played in full-screen at 100%_** or by clicking on the enemy sprite's name.
 
 ### Special Abilities
 There are two abilities that each have a cool down on use. A group attack the massively damages all enemies, and a group heal that heals a certain percentage of the player sprite's health points(HP). **When the ability is ready the bar will begin flashing!**
