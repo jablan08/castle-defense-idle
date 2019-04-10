@@ -136,7 +136,7 @@ input {
     border-radius: 30%;
     display: block;
 }
-#startButton:hover, #playAgainButton:hover, #howToPlay:hover, .musicPlay, .musicPause {
+#startButton:hover, #playAgainButton:hover, #howToPlay:hover, .musicPlay:hover, .musicPause:hover {
     background-color: #f50a0a;
     color: white;
 }
