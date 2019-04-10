@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    
     <div id="splashScreen">
         <h1 class="title">Castle Defense Idle</h1>
         <p class="splash-content">
@@ -22,7 +23,7 @@
             <img class="idleArcher" src="imgs/sprites/idle_archer.gif">
         </div>
         <button id="startButton" type="button">DEFEND!</button>
-        <button id="howToPlay" type="button">How to Play</button>
+        <button id="howToPlay" type="button">How to Play & Music!</button>
         <button id="playAgainButton" type="button">TRY AGAIN?</button>
     </div>
     <div class="modal">
@@ -44,61 +45,65 @@
 
     </div>
     <div class="container">
-    <h1 class="wave">Enemies remaining: 5</h1>
-    
-    <canvas id="screen" width="800"  height="500" ></canvas>
-            
-    <div class="menus">
-        <div class="enemyMenu">
-            <div class="enemyHP">
-                <h4 class="snake">Snake</h4>
-                <div class="snakeHpBar">HP</div>
-                <div class="snakeAttkBar"></div>
-
-                <h4 class="slime">Slime</h4>
-                <div class="slimeHpBar">HP</div>
-                <div class="slimeAttkBar"></div>
-
-                <h4 class="dino">Dino</h4>
-                <div class="dinoHpBar">HP</div>
-                <div class="dinoAttkBar"></div>
+        <h1 class="wave">Enemies remaining: 5</h1>
+        
+        <canvas id="screen" width="800"  height="500" ></canvas>
                 
-                <h4 class="lizard">Lizard</h4>
-                <div class="lizHpBar">HP</div>
-                <div class="lizAttkBar"></div>
+        <div class="menus">
+            <div class="enemyMenu">
+                <div class="enemyHP">
+                    <h4 class="snake">Snake</h4>
+                    <div class="snakeHpBar">HP</div>
+                    <div class="snakeAttkBar"></div>
 
-                <h4 class="dragon">Dragon</h4>
-                <div class="dragHpBar">HP</div>
-                <div class="dragAttkBar"></div>
+                    <h4 class="slime">Slime</h4>
+                    <div class="slimeHpBar">HP</div>
+                    <div class="slimeAttkBar"></div>
 
+                    <h4 class="dino">Dino</h4>
+                    <div class="dinoHpBar">HP</div>
+                    <div class="dinoAttkBar"></div>
+                    
+                    <h4 class="lizard">Lizard</h4>
+                    <div class="lizHpBar">HP</div>
+                    <div class="lizAttkBar"></div>
+
+                    <h4 class="dragon">Dragon</h4>
+                    <div class="dragHpBar">HP</div>
+                    <div class="dragAttkBar"></div>
+
+                </div>
             </div>
-        </div>
-        <div class="characterMenu">
-            <div class="targets">
-                <div class="currentTarget">Current Target: Dino</div>
-                <p class="targeting">Click on the monster or the monster's name to target!</p>
-            </div>
-            <div class="icons">
-                <input type="image" class="attack" src="imgs/icons/menu.special.png">
-                <div class="specialBar"></div>
-                <input type="image" class="items" src="imgs/icons/menu.heal.png">
-                <div class="healBar"></div>
-            </div>
-            
-            <div class="characterHP">
-                <h4 class="warTag">Warrior</h4>
-                <div class="warHpBar">HP</div>
-                <div class="warAttkBar"></div>
-                <h4 class="archerTag">Archer</h4>
-                <div class="archerHpBar">HP</div>
-                <div class="archerAttkBar"></div>
-                <h4 class="mageTag">Mage</h4>
-                <div class="mageHpBar">HP</div>
-                <div class="mageAttkBar"></div>
+            <div class="characterMenu">
+                <div class="targets">
+                    <div class="currentTarget">Current Target: Dino</div>
+                    <p class="targeting">Click on the monster or the monster's name to target!</p>
+                    <button class="musicPlay">Music: ON</button>
+                    <button class="musicPause">Music: OFF</button>
+                </div>
+                <div class="icons">
+                    <input type="image" class="attack" src="imgs/icons/menu.special.png">
+                    <div class="specialBar"></div>
+                    <input type="image" class="items" src="imgs/icons/menu.heal.png">
+                    <div class="healBar"></div>
+                </div>
+                
+                <div class="characterHP">
+                    <h4 class="warTag">Warrior</h4>
+                    <div class="warHpBar">HP</div>
+                    <div class="warAttkBar"></div>
+                    <h4 class="archerTag">Archer</h4>
+                    <div class="archerHpBar">HP</div>
+                    <div class="archerAttkBar"></div>
+                    <h4 class="mageTag">Mage</h4>
+                    <div class="mageHpBar">HP</div>
+                    <div class="mageAttkBar"></div>
+                </div>
             </div>
         </div>
     </div>
-    </div>
+    <audio src="music/opening.ogg" loop>
+    </audio>
     <script src="js/players.js"></script>
     <script src="js/main.js"></script>
 </body>

@@ -7,6 +7,8 @@ const cxt = canvas.getContext("2d");
 const wave = document.querySelector(".wave");
 const currentTarget = document.querySelector(".currentTarget");
 
+const musicPlay = document.querySelector(".musicPlay")
+const musicPause = document.querySelector(".musicPause")
 const startButton = document.getElementById("startButton");
 const playAgainButton = document.getElementById("playAgainButton");
 const attackButton = document.querySelector(".attack");
@@ -14,12 +16,10 @@ const healButton = document.querySelector(".items");
 const healBar = document.querySelector(".healBar")
 const specialBar = document.querySelector(".specialBar");
 const howToPlay = document.querySelector("#howToPlay");
-// Get the modal
+
+const music = document.querySelector("audio")
 const modal = document.querySelector(".modal");
-
-// Get the <span> element that closes the modal
 const span = document.querySelector(".close");
-
 const title = document.querySelector(".title");
 const sireMsg = document.querySelector(".sireMsg");
 const splashContent = document.querySelector(".splash-content")
@@ -64,6 +64,11 @@ const dragonTag = document.querySelector(".dragon");
 const dragHpBar = document.querySelector(".dragHpBar");
 const dragAttkBar = document.querySelector(".dragAttkBar");
 
+const specialSound = new Audio("music/special2.ogg");
+const healSound = new Audio("music/heal.ogg");
+const attackSound = new Audio("music/attack.ogg");
+const enemyHit = new Audio("music/enemyHit2.ogg")
+
 // Game checker
 
 const game = {
@@ -80,7 +85,9 @@ const game = {
     healReady: false,
     playersDead: false,
     gameOver(){
+        
         if (this.playersDead === true){
+            music.src ="music/loser.ogg";
             setTimeout(()=>{
                 this.run = false;
                 title.innerText = "GAME OVER";
@@ -91,8 +98,12 @@ const game = {
                 splashScreen.style.animation = "fadein 3s";
                 playAgainButton.style.display = "inline";
                 loser.style.display = "block";
+                music.play();
+                music.loop = false;
             }, 1000)
         } else {
+            
+            music.src = "music/winner.ogg";
             setTimeout(()=>{
                 this.run = false;
                 title.innerText = "HOOORAYYYY!";
@@ -103,6 +114,8 @@ const game = {
                 playAgainButton.style.display = "inline";
                 playAgainButton.innerText = "DEFEND AGAIN?"
                 winner.style.display = "block";
+                music.play();
+                music.loop = false;
             }, 1000)
         }
     },
@@ -119,6 +132,7 @@ const game = {
     newWave() {
         this.run = false;
         this.finalBoss = true;
+        music.src = "music/finalBoss.ogg";
         container.style.animation = "fadeout 3s";
         setTimeout(()=>{
         screen.style.backgroundImage = "url(css/background/castle.png)";
@@ -126,6 +140,7 @@ const game = {
         this.run = true;
         currentTarget.innerText = "Current Target: Lizard";
         game.target = "Lizard";
+        music.play();
         },1500)
         dragonTag.style.display = "block";
         dragAttkBar.style.display = "block";
@@ -238,16 +253,19 @@ addEventListener("click", function(event){
 startButton.addEventListener("click", ()=>{
     game.run = true;
     splashScreen.style.animation = "fadeout 3s";
+    music.src ="music/battle.ogg"
     setTimeout(()=>{
         title.innerText = "";
         startButton.style.display = "none";
         splashContent.style.display = "none";
         splashScreen.style.display = "none";
         sireMsg.style.display = "none";
+        howToPlay.style.display ="none";
         splashScreen.style.animation = "";
         container.style.display = "block";
         idleImgs.style.display = "none";
         modal.style.display = "none";
+        music.play();
     },1000)
 });
 
@@ -274,8 +292,14 @@ attackButton.addEventListener("click", ()=>{
 span.addEventListener("click", ()=>{
     modal.style.display = "none";
 })
-
+musicPlay.addEventListener("click",()=>{
+    music.play();
+})
+musicPause.addEventListener("click",()=>{
+    music.pause();
+})
 howToPlay.addEventListener("click", ()=>{
+    music.play(); 
     modal.style.display = "block";
 })
 
@@ -284,6 +308,7 @@ window.addEventListener("click", (event)=> {
       modal.style.display = "none";
     }
 })
+
 healButton.addEventListener("click", ()=>{
     if (game.healReady===true) {
         mage.healthGain();

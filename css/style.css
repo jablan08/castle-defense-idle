@@ -136,11 +136,13 @@ input {
     border-radius: 30%;
     display: block;
 }
-#startButton:hover, #playAgainButton:hover, #howToPlay:hover {
+#startButton:hover, #playAgainButton:hover, #howToPlay:hover, .musicPlay, .musicPause {
     background-color: #f50a0a;
     color: white;
-  }
-
+}
+.musicPlay, .musicPause {
+    font-family: 'Black Ops One', cursive;
+}
 .specialBar, .healBar {
     width: 1%;
     height: 5px;

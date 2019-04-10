@@ -84,14 +84,14 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
             game.specialReady = true;
             specialBar.style.animation = "readyFlash .5s infinite";
         } else {
-            this.special +=.25;
+            this.special +=.22;
             specialBar.style.width = this.special + '%' 
         }
         if (this.heal >=100){
             game.healReady = true;
             healBar.style.animation = "readyFlash .5s infinite";
         } else {
-            this.heal +=.15;
+            this.heal +=20;
             healBar.style.width = this.heal + '%' 
         }
     }
@@ -99,12 +99,12 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     this.allAttack = function() {
         game.specialReady = false;
         this.special = 1;
+        specialSound.play();
         specialBar.style.width = this.special + '%' 
         this.attackReady = true;
         this.currentFrame = ++this.currentFrame % this.cols;
         this.srcX = this.currentFrame * this.frameWidth;
         this.srcY = this.attackPos * this.frameHeight;
-            
         setTimeout(()=> {
             this.attackReady = false
             }, 750)
@@ -113,12 +113,11 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
         game.healReady = false;
         this.heal = 1;
         healBar.style.width = this.heal + '%';
-
+        healSound.play();
     }
 
     this.attackFrame = function() {
         if (this.attackReady === true){
-            
             this.currentFrame = ++this.currentFrame % this.cols;
             this.srcX = this.currentFrame * this.frameWidth;
             this.srcY = this.attackPos * this.frameHeight;
@@ -131,6 +130,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     }
 
     this.attack = function(){
+        attackSound.play();
         if (game.target=== "Dino") {
             dinoHpBar.style.width = `${dino.hp -= this.strength}%`;
         } else if (game.target==="Slime") {
@@ -234,6 +234,7 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
     }
 
     this.attack = function() {
+        enemyHit.play();
         let random = Math.floor(Math.random()*3);
         if (game.CPUtarget[random]==="warrior"){
             warriorHpBar.style.width = `${warrior.hp -= this.strength}%`;
