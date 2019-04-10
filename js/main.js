@@ -13,13 +13,18 @@ const attackButton = document.querySelector(".attack");
 const healButton = document.querySelector(".items");
 const healBar = document.querySelector(".healBar")
 const specialBar = document.querySelector(".specialBar");
+const howToPlay = document.querySelector("#howToPlay");
+// Get the modal
+const modal = document.querySelector(".modal");
 
+// Get the <span> element that closes the modal
+const span = document.querySelector(".close");
 
 const title = document.querySelector(".title");
 const sireMsg = document.querySelector(".sireMsg");
 const splashContent = document.querySelector(".splash-content")
 const winner = document.querySelector(".winner");
-const loser = document.querySelector(".loser")
+const loser = document.querySelector(".loser");
 const body = document.querySelector("body");
 const container = document.querySelector(".container");
 const screen = document.getElementById("screen");
@@ -265,7 +270,19 @@ attackButton.addEventListener("click", ()=>{
         }
     }
 });
+span.addEventListener("click", ()=>{
+    modal.style.display = "none";
+})
 
+howToPlay.addEventListener("click", ()=>{
+    modal.style.display = "block";
+})
+
+window.addEventListener("click", (event)=> {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+})
 healButton.addEventListener("click", ()=>{
     if (game.healReady===true) {
         mage.healthGain();
