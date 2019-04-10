@@ -14,7 +14,7 @@ This game was built for easy addition of sprites in the future by using object o
 While this is an idle game with auto targeting, the player is able to select a target for strategy by clicking on the monster image **_if played in full-screen_** or by clicking on the enemy sprite's name.
 
 ### Special Abilities
-There are two abilites that each have a cooldown on use. A group attack the massively damages all enemies, and a group heal that heals a certain precentage of the player sprite's health points(HP). **When the ability is ready the bar will begin flashing!**
+There are two abilities that each have a cool down on use. A group attack the massively damages all enemies, and a group heal that heals a certain percentage of the player sprite's health points(HP). **When the ability is ready the bar will begin flashing!**
 
 ![alt text](https://raw.githubusercontent.com/jablan08/castle-defense-idle/master/imgs/icons/menu.special.png) ![alt text](https://raw.githubusercontent.com/jablan08/castle-defense-idle/master/imgs/icons/menu.heal.png)
 
