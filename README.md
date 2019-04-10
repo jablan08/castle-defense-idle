@@ -38,6 +38,7 @@ Play in full-screen for the best experience!
 * Enemy item drops
 * Equipment and gear to increase player stats
 * Create user menu to handle stats and gear
+* Add on-hit animations
 
 
 
