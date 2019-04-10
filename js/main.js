@@ -1,6 +1,4 @@
 
-
-
 const canvas = document.querySelector("canvas");
 const cxt = canvas.getContext("2d");
 
@@ -69,8 +67,6 @@ const healSound = new Audio("music/heal.ogg");
 const attackSound = new Audio("music/attack.ogg");
 const enemyHit = new Audio("music/enemyHit2.ogg")
 
-// Game checker
-
 const game = {
     mobs: 5,
     wave() {
@@ -85,7 +81,6 @@ const game = {
     healReady: false,
     playersDead: false,
     gameOver(){
-        
         if (this.playersDead === true){
             music.src ="music/loser.ogg";
             setTimeout(()=>{
@@ -102,7 +97,6 @@ const game = {
                 music.loop = false;
             }, 1000)
         } else {
-            
             music.src = "music/winner.ogg";
             setTimeout(()=>{
                 this.run = false;
@@ -224,8 +218,6 @@ const game = {
     }
 }
 
-//  Event listeners 
-
 addEventListener("click", function(event){
     if (event.x > 398 && event.x < 524 && event.y < 452 && event.y > 403 && dino.alive===true || event.target.classList[0] === "dino") {
         currentTarget.innerText = "Current Target: Dino";
@@ -238,7 +230,6 @@ addEventListener("click", function(event){
         game.target = "Snake";
     }
 })
-// Dragon and Lizard event listeners.
 
 addEventListener("click", function(event){
     if (event.x > 382 && event.x < 565 && event.y < 458 && event.y > 327 && game.finalBoss ===true || event.target.classList[0] === "dragon") {
@@ -249,7 +240,7 @@ addEventListener("click", function(event){
         game.target = "Lizard";
     }
 })
-// Splash Screen and Start Button
+
 startButton.addEventListener("click", ()=>{
     game.run = true;
     splashScreen.style.animation = "fadeout 3s";
@@ -336,8 +327,7 @@ healButton.addEventListener("click", ()=>{
     }
 });
 
-// Sprites 
-let enemies = [
+const enemies = [
     [
         lizard = new Enemy(1240,453,5,3,canvas.width*.25,210,"lizard",1,1.20,15)
     ],
@@ -358,7 +348,6 @@ warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,.75,10);
 archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer",4,1.50,5.5);
 mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,.50,15);
 
-// Interval update
 const animate2 = setInterval(function(){
     cxt.clearRect(0,0, innerWidth,innerHeight);
     if (game.run === true){

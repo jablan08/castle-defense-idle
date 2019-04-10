@@ -1,9 +1,7 @@
 
-
 const imgs = ["imgs/sprites/war.spread.png", "imgs/sprites/archer.png", "imgs/sprites/mage.png"];
 const enemyImgs = ["imgs/sprites/enemy.lizard.png", "imgs/sprites/enemy.dragon.png","imgs/sprites/enemy.slime.png","imgs/sprites/enemy.snake.png", "imgs/sprites/enemy.dino.png"];
 
-// Player
 function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRate,strength) {
     this.srcX; 
     this.srcY;
@@ -28,19 +26,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     this.special = 1;
     this.heal = 1;
     this.alive = true;
-    this.hp = 100;
-// Create sprite image    
-    this.draw = function() {
-        cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
-    }
-// Motion
-    this.playerMotion = function() {
-        if (this.attackReady === false)
-        {this.currentFrame = ++this.currentFrame % this.cols;
-        this.srcX = this.currentFrame * this.frameWidth;
-        this.srcY = this.idlePos * this.frameHeight;}
-    }
-// Full player update
+    this.hp = 100;   
     this.update = function() {
         if (this.alive === true){
         this.playerImage();
@@ -53,6 +39,17 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
         }
     }
 
+    this.draw = function() {
+        cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
+    }
+
+    this.playerMotion = function() {
+        if (this.attackReady === false)
+        {this.currentFrame = ++this.currentFrame % this.cols;
+        this.srcX = this.currentFrame * this.frameWidth;
+        this.srcY = this.idlePos * this.frameHeight;}
+    }
+    
     this.checkDead = function(){
         if (this.hp <= 0){
             this.alive = false;  
@@ -121,12 +118,10 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
             this.currentFrame = ++this.currentFrame % this.cols;
             this.srcX = this.currentFrame * this.frameWidth;
             this.srcY = this.attackPos * this.frameHeight;
-            
         setTimeout(()=> {
             this.attackReady = false
             }, 750)
         }
-        
     }
 
     this.attack = function(){
@@ -155,7 +150,6 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
     }
 }
 
-// Enemies
 function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRate,strength) {
     this.srcX; 
     this.srcY;
@@ -179,18 +173,6 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
     this.attackPos = attackPos;
     this.alive = true;
     this.hp = 100;
-
-    this.draw = function() {
-        cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
-    }
-
-    this.enemyMotion = function() {
-        if (this.attackReady===false)
-        {this.currentFrame = ++this.currentFrame % this.cols;
-        this.srcX = this.currentFrame * this.frameWidth;
-        this.srcY = this.idlePos * this.frameHeight;}
-    }
-
     this.update = function() {
         if (this.alive ===true){
         this.enemyImage();
@@ -202,6 +184,17 @@ function Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRa
         }
     }
 
+    this.draw = function() {
+        cxt.drawImage(this.image, this.srcX, this.srcY, this.frameWidth, this.frameHeight, this.x,this.y,this.frameWidth,this.frameHeight)
+    }
+
+    this.enemyMotion = function() {
+        if (this.attackReady===false)
+        {this.currentFrame = ++this.currentFrame % this.cols;
+        this.srcX = this.currentFrame * this.frameWidth;
+        this.srcY = this.idlePos * this.frameHeight;}
+    }
+    
     this.enemyBars = function() {
         if (this.attkSpeed >= 100) {
             this.attackReady = true;
