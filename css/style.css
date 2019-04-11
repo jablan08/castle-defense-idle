@@ -221,6 +221,7 @@ input {
     width: 40%; 
     font-family: 'Black Ops One', cursive;
     font-size: 15px;
+    display: grid;
 }
 
 .modalTitle {
