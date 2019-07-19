@@ -29,7 +29,6 @@ Play in full-screen for the best experience!
 * Canvas
 * HTML
 * CSS
-* CSS @Keyframes
 
 ## Future updates
 * Add more enemies and levels
