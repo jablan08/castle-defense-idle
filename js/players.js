@@ -69,26 +69,26 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
             archerAttkBar.style.width = this.attkSpeed + '%'; 
             mageAttkBar.style.width = this.attkSpeed + '%'; 
         } else {
-            this.attkSpeed+= this.attkRate; 
+            this.attkSpeed += this.attkRate; 
             warAttkBar.style.width = warrior.attkSpeed + '%'
             archerAttkBar.style.width = archer.attkSpeed + '%'; 
             mageAttkBar.style.width = mage.attkSpeed + '%';
         }
     }
 
-    this.specialHealBars = function (){
+    this.specialHealBars = function() {
         if (this.special>=100){
             game.specialReady = true;
             specialBar.style.animation = "readyFlash .5s infinite";
         } else {
-            this.special +=.22;
+            this.special +=.75;
             specialBar.style.width = this.special + '%' 
         }
         if (this.heal >=100){
             game.healReady = true;
             healBar.style.animation = "readyFlash .5s infinite";
         } else {
-            this.heal +=.20;
+            this.heal += .70;
             healBar.style.width = this.heal + '%' 
         }
     }
@@ -104,7 +104,7 @@ function Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkR
         this.srcY = this.attackPos * this.frameHeight;
         setTimeout(()=> {
             this.attackReady = false
-            }, 750)
+            }, 1000)
     }
     this.healthGain = function() {
         game.healReady = false;
