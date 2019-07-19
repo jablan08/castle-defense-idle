@@ -82,7 +82,7 @@ const game = {
     gameOver(){
         if (this.playersDead === true){
             music.src ="music/loser.ogg";
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.run = false;
                 title.innerText = "GAME OVER";
                 title.style.color = "red";
@@ -97,7 +97,7 @@ const game = {
             }, 1000)
         } else {
             music.src = "music/winner.ogg";
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.run = false;
                 title.innerText = "HOOORAYYYY!";
                 container.style.animation = "fadeout 3s";
@@ -114,7 +114,7 @@ const game = {
     },
     update(){
         if (this.mobs === 2 && this.finalBoss === false) {
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.newWave();
             },500)   
         } else if (this.mobs === 0 || this.playersDead === true){
@@ -127,7 +127,7 @@ const game = {
         this.finalBoss = true;
         music.src = "music/finalBoss.ogg";
         container.style.animation = "fadeout 3s";
-        setTimeout(()=>{
+        setTimeout(() => {
         screen.style.backgroundImage = "url(css/background/castle.png)";
         container.style.animation = "fadein 3s";
         this.run = true;
@@ -143,28 +143,28 @@ const game = {
         lizHpBar.style.display = "block";
     },
     deadPlayer() {
-        if (warrior.alive===false){
+        if (warrior.alive === false){
             warTag.style.display = "none";
             warAttkBar.style.display = "none";
             warriorHpBar.style.display = "none";
         } 
-        if (archer.alive===false){
+        if (archer.alive === false){
             archerTag.style.display = "none";
             archerAttkBar.style.display = "none";
             archerHpBar.style.display = "none";
         } 
-        if (mage.alive===false){
+        if (mage.alive === false){
             mageTag.style.display = "none";
             mageAttkBar.style.display = "none";
             mageHpBar.style.display = "none";
         }
     },
     deadEnemy(){
-        if (dino.alive===false){
+        if (dino.alive === false){
             dinoTag.style.display = "none";
             dinoAttkBar.style.display = "none";
             dinoHpBar.style.display = "none";
-            if (snake.alive===true) {
+            if (snake.alive === true) {
                 currentTarget.innerText = "Current Target: Snake";
                 game.target = "Snake";
             } else {
@@ -172,11 +172,11 @@ const game = {
                 game.target = "Slime"
             }
         }; 
-        if (slime.alive===false){
+        if (slime.alive === false){
             slimeTag.style.display = "none";
             slimeAttkBar.style.display = "none";
             slimeHpBar.style.display = "none";
-            if (snake.alive===true) {
+            if (snake.alive === true) {
                 currentTarget.innerText = "Current Target: Snake";
                 game.target = "Snake";
             } else {
@@ -184,11 +184,11 @@ const game = {
                 game.target = "Dino"
             }
         }; 
-        if (snake.alive===false){
+        if (snake.alive === false){
             snakeTag.style.display = "none";
             snakeAttkBar.style.display = "none";
             snakeHpBar.style.display = "none";
-            if (dino.alive===true) {
+            if (dino.alive === true) {
                 currentTarget.innerText = "Current Target: Dino";
                 game.target = "Dino";
             } else {
@@ -205,11 +205,11 @@ const game = {
                 game.target = "Dragon";
             }
         }
-        if (dragon.alive===false){
+        if (dragon.alive === false){
             dragonTag.style.display = "none";
             dragAttkBar.style.display = "none";
             dragHpBar.style.display = "none";
-            if (lizard.alive===true) {
+            if (lizard.alive === true) {
                 currentTarget.innerText = "Current Target: Lizard";
                 game.target = "Lizard";
             }
@@ -217,34 +217,34 @@ const game = {
     }
 }
 
-addEventListener("click", function(event){
-    if (event.x > 398 && event.x < 524 && event.y < 452 && event.y > 403 && dino.alive===true || event.target.classList[0] === "dino") {
+addEventListener("click", (event) => {
+    if (event.x > 398 && event.x < 524 && event.y < 452 && event.y > 403 && dino.alive === true || event.target.classList[0] === "dino") {
         currentTarget.innerText = "Current Target: Dino";
         game.target = "Dino";
-    } else if (event.x > 520 && event.x < 601 && event.y < 385 && event.y > 335 && slime.alive===true || event.target.classList[0] === "slime") {
+    } else if (event.x > 520 && event.x < 601 && event.y < 385 && event.y > 335 && slime.alive === true || event.target.classList[0] === "slime") {
         currentTarget.innerText = "Current Target: Slime";
         game.target = "Slime";
-    } else if (event.x > 519 && event.x < 608 && event.y < 493 && event.y > 445 && snake.alive===true || event.target.classList[0] === "snake") {
+    } else if (event.x > 519 && event.x < 608 && event.y < 493 && event.y > 445 && snake.alive === true || event.target.classList[0] === "snake") {
         currentTarget.innerText = "Current Target: Snake";
         game.target = "Snake";
     }
 })
 
-addEventListener("click", function(event){
-    if (event.x > 382 && event.x < 565 && event.y < 458 && event.y > 327 && game.finalBoss ===true || event.target.classList[0] === "dragon") {
+addEventListener("click", (event) => {
+    if (event.x > 382 && event.x < 565 && event.y < 458 && event.y > 327 && game.finalBoss === true || event.target.classList[0] === "dragon") {
         currentTarget.innerText = "Current Target: Dragon";
         game.target = "Dragon";
-    } else if (event.x > 549 && event.x < 692 && event.y < 388 && event.y > 293 && game.finalBoss ===true || event.target.classList[0] === "lizard") {
+    } else if (event.x > 549 && event.x < 692 && event.y < 388 && event.y > 293 && game.finalBoss === true || event.target.classList[0] === "lizard") {
         currentTarget.innerText = "Current Target: Lizard";
         game.target = "Lizard";
     }
 })
 
-startButton.addEventListener("click", ()=>{
+startButton.addEventListener("click", () => {
     game.run = true;
     splashScreen.style.animation = "fadeout 3s";
     music.src ="music/battle.ogg"
-    setTimeout(()=>{
+    setTimeout(() => {
         title.innerText = "";
         startButton.style.display = "none";
         splashContent.style.display = "none";
@@ -259,12 +259,12 @@ startButton.addEventListener("click", ()=>{
     },1000)
 });
 
-playAgainButton.addEventListener("click", ()=>{
+playAgainButton.addEventListener("click", () => {
     window.location.reload();
 });
 
-attackButton.addEventListener("click", ()=>{
-    if (game.specialReady===true) {
+attackButton.addEventListener("click", () => {
+    if (game.specialReady === true) {
         warrior.allAttack();
         archer.allAttack();
         mage.allAttack();
@@ -279,16 +279,16 @@ attackButton.addEventListener("click", ()=>{
         }
     }
 });
-span.addEventListener("click", ()=>{
+span.addEventListener("click", () => {
     modal.style.display = "none";
 })
-musicPlay.addEventListener("click",()=>{
+musicPlay.addEventListener("click",() => {
     music.play();
 })
-musicPause.addEventListener("click",()=>{
+musicPause.addEventListener("click",() => {
     music.pause();
 })
-howToPlay.addEventListener("click", ()=>{
+howToPlay.addEventListener("click", () => {
     music.play(); 
     modal.style.display = "block";
 })
@@ -299,7 +299,7 @@ window.addEventListener("click", (event)=> {
     }
 })
 
-healButton.addEventListener("click", ()=>{
+healButton.addEventListener("click", () => {
     if (game.healReady===true) {
         mage.healthGain();
         warrior.healthGain();
@@ -320,7 +320,7 @@ healButton.addEventListener("click", ()=>{
         } else {
             mageHpBar.style.width = `${mage.hp += 30}%`
         }
-        setTimeout(()=>{
+        setTimeout(() => {
             body.style.animation = "";
         }, 2000)
     }
