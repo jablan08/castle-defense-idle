@@ -325,27 +325,28 @@ healButton.addEventListener("click", () => {
         }, 2000)
     }
 });
-
+// Enemy(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRate,strength)
 const enemies = [
     [
-        lizard = new Enemy(1240,453,5,3,canvas.width*.25,210,"lizard",1,1.20,15)
+        lizard = new Enemy(1240,453,5,3,canvas.width*.25,210,"lizard",1,2.20,15)
     ],
     [
-        dragon = new Enemy(1290,1045,5,5,canvas.width*.06,225,"dragon",1,1,21.5)
+        dragon = new Enemy(1290,1045,5,5,canvas.width*.06,225,"dragon",1,2,21.5)
     ],
     [
-        slime = new Enemy(705,535,5,5,canvas.width*.25,245,"slime",3,1,9)
+        slime = new Enemy(705,535,5,5,canvas.width*.25,245,"slime",3,2.50,9)
     ],
     [
-        snake = new Enemy(735,376,5,4,canvas.width*.25,370,"snake",1,1.25,8)
+        snake = new Enemy(735,376,5,4,canvas.width*.25,370,"snake",1,3.25,8)
     ],
     [
-        dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino",2,.75,10)
+        dino = new Enemy(770,472,5,4,canvas.width*.10,300,"dino",2,2.75,10)
     ],
 ]
-warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,.75,10);
-archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer",4,1.50,5.5);
-mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,.50,15);
+// Player(sheetWidth, sheetHeight, cols, rows, x, y, name, attackPos,attkRate,strength)
+warrior = new Player(1200,416,5,4,canvas.width*.55,300,"warrior",1,2.50,10);
+archer = new Player(1264,1038,8,6,canvas.width*.75, 310,"archer",4,3.50,5.5);
+mage = new Player(966,636,6,6,canvas.width*.75,250,"mage",4,2,15);
 
 const animate2 = setInterval(function(){
     cxt.clearRect(0,0, innerWidth,innerHeight);
